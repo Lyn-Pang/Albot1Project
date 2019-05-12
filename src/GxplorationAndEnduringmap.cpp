@@ -1,0 +1,1520 @@
+
+//============================================================================
+// Name        : Exploration and Enduring map
+// Author      : Wenwang (Lyn)
+// Version     :
+// Copyright   : Your copyright notice
+// Description : 
+//============================================================================
+#include <iostream>
+#include <stdio.h>
+#include <dirent.h>
+#include <vector>
+#include <cmath>
+#include <sstream>
+#include <algorithm>
+#include <string>
+#include <math.h>
+
+#include "readAndwriteASCII.H"
+#include "Plotting.H"
+#include "GeometricOp.H"
+
+#include "Point.H"
+#include "Object.H"
+#include "asr.H"
+#include "mfisOp.H"
+#include "asrOp.H"
+#include "PathPlanning.H"
+#include "Transporter.H"
+
+#include "Minfo.H"
+#include "Map.H"
+#include "CompareASR.H"
+#include "Mapping.H"
+
+#include "PointAndSurface.H"
+#include "convexPathPlanner.h"
+#include "PolygonChoice.h"
+#include "PerceptualMapping.H"
+#include "Comparison.h"
+
+#include "GeometryAndExit.h"
+#include "GeometryFuncs.H"
+#include "GeometricOp.H"
+#include "ToolFunctions.h"
+#include "thesis.H"
+#include "ChunksOp.H"
+#include "ConvexHull.h"
+#include "Exit.h"
+#include "Expectation.h"
+
+#include "ChunkInfor.h"
+#include "FunctionOfMFIS.h"
+#include "PathIntegrationModule.h"
+
+//#include "concave_hull.h"
+#include "StructBoundary.h"
+
+#include <cstdlib>
+#include <ctime>
+
+
+#define PI 3.14159265
+using namespace std;
+
+//***********************************************************************************//
+
+void TransforIntoGloabl(vector<Object> addView, Point coord, vector<Object> currentPos, 
+                                double angle, int num); // only transform
+vector<Object> TransformforAllviews(vector<Object> addView, Point coord, vector<Object> currentPos,
+                                double angle, int num);
+
+/*************************************************************************************/
+
+const char* levelName = "inputData/level";
+const char* surfaceName = "/surfaces-";
+char viewFileName[80], mfisFileName[80], ctFileName[80], LocalMFileName[80];
+char exitsFileName[80];
+
+//char testFileName[80]; // this file char array is of test programme and plot
+
+//char Flag_LM;
+LocalMap LMS; // added for chunk & local maps
+Transporter chunks; // added for chunk & local maps
+vector<Chunk> allChunks;// added for chunk & local maps
+
+vector<Object> NewLM; // a new local map
+vector<Object> PreLM; // previous local map
+vector<Object> ALLlocalMap, MapofLMs;
+vector< vector<Object> > ALLlocalMapInGlobal;
+
+double traveledDistance = 0; // total distance traversed 
+double robotFacing = 0; //in degree relating to global
+double robotTurning = 0; //in degree relating to global
+vector<double> facingOrient;
+
+vector< vector<Object> > allLEs; // all local environments 
+vector< vector<Object> > Memories; // all local maps as memories
+vector< vector<Object> > ListOfPositions; // for storing currentCRPInMFIS variable 
+
+vector<Point> RobotPs;
+vector<Point> rbs;
+
+vector<Point> turningPoint; // for generating path
+unsigned char turningFlag = 0; // 0 - not turn  1- turned
+
+//**********************************//
+vector<Object> GlobalLM;
+vector<ASR> placesOfLM;
+Transporter computeRe, Cmoutput;
+Transporter lastLMInfo;
+
+Object xAxisAtCRP; // x axis angle current robot position in global coordinate
+Object xAxisIncurrentCrd; // x axis angle current robot position in current coordinate
+double PrexAxis;
+Object Pathfromlimiting;
+vector<Object> routeMapCo;
+
+vector<Object> PreLandmarks;
+vector<Exit> exitsFromcurrentLM;
+vector<Object> odomRef;
+vector<Object> odometricPosition;
+vector<Object> LandMarkCV;
+vector<Object> robotPositionsInLMs;
+
+vector<Object> currentRobotPositionInMFIS, odometricCRPositionInMFIS;
+vector<Object> PI_RobotPosition; ///every step
+vector<Object> currentTransLM;
+
+unsigned char firstloop_Flag = 0;  //first loop flag 
+unsigned char lastloop_Flag = 0;   //last loop flag for chunk process
+
+unsigned char PI_switch_Flag = 0; //PI switch flag
+unsigned char function_switch_Flag = 1; //1 -- method1 (normal process), 2 -- method2 (expectation process)
+unsigned char expectation_flag = 0;
+unsigned char familiar_flag = 0;
+
+vector<int> updatingNumber;
+vector<int> intersection_positions; //all intersection positions
+
+MyRobot robot(0, 0);
+vector<Object> allASR;
+
+//---chunk process variable---//
+vector<Object> LMprocess_GlobalMap; //the global map for processing local map
+vector< vector<Object> > robot_Positions; //global position of robot 
+vector<Point> robot_points;               //global point of robot position
+vector< vector<Object> > views;           //transformed to uniform coordinate
+vector<int> id_group;                     //view ID of a group
+vector<Object> Global_ASR;
+
+vector<Object> last_step_MFIS;            //for compute chunk map
+
+vector<Object> last_Chunk_Map;            //last chunk map
+
+int last_Chunk_step = 0;                      //the step ID computing last chunk
+int before_start_number = 0;                   //
+//----------------------------//
+
+//--- Expectation process vari---//
+int fist_step_m2 = 0; // 0 is the first step 
+int info_part_flag = 0;
+int m1_start_point = 1; //the start point of m1 
+vector<Object> robot_orientation_arrow;//arrow based on robot's orientation
+vector<Object> switch_robot_position;
+vector<Object> transformed_view; 
+vector<Object> environment_map;             //after projection, the mfis becomes fixed
+vector<Object> last_environment_map;
+vector<Object> geometry_map;
+vector<Object> geometry_boundary;
+vector<Object> project_memory;
+
+vector<Object> sides_of_geo; //four sides of geometry of local space
+
+vector< vector<Object> > corrected_info;
+vector< vector<Object> > all_arrows;
+vector< vector<Object> > clusters;
+vector< vector<Object> > all_resions;
+
+pair< vector<Object>,  vector<Object> > adjust_info;
+
+vector<Exit> potential_exits; //all potential exits
+vector<Exit> exit_in_region;  //potentional exits in a particular region
+
+Region_struct regions_exits; //each chunk regions and exits
+vector<Region_struct> all_chunks_region_exit;
+
+Exit current_region_exit; // current region exit
+Exit last_region_exit;    // last region exit
+
+Object last_entry_side, last_exit_side;       // important sides in last region
+Object current_entry_side, current_exit_side; // important sides in current region
+
+vector<Exit> possible_exits_in_MFIS;
+
+//for structural geometry
+vector< vector<Object> > last_chunk_regions;
+vector< vector<Object> > current_regions; 
+vector< vector<Object> > all_chunks; 
+
+vector< vector<Object> > all_chunk_path;
+
+
+//for plotting
+vector<Object> test_robot_positions;
+vector<Object> enduring_part;
+vector<Object> enduring_map_polygon;
+vector<Surface> currnet_enduring_poly_area;
+vector<Surface> polygon;
+
+vector<ChunkInfo> all_chunk_info;
+//counters for paper
+int chunk_cnt = 0;  //chunk counter
+int vt_counter = 0; //visual triangulation
+int pi_counter = 0; //path integration
+
+//vector<Object> temp_env_map;
+
+int main()
+{
+    int v, w, r, level, set, saveFrom, saveTo;
+    int start_Number = 0;
+    
+    
+    cout << "Which level?? ";
+    cin >> level;
+    cout << "Which dataset?? ";
+    cin >> set;
+    cout << "How far to go????????? (e.g. 1 71)" << endl << endl;
+    cin >> v;
+    cin >> w;
+
+    data_level = level; //chunk info process
+    data_set = set;     //chunk info process
+    
+    updatingNumber.push_back(1);
+    rbs.push_back(Point(0, 0));
+    facingOrient.push_back(0);
+    int referenceNumberTH = 0;
+    char mappingInfoFileName[100];
+
+     
+    sprintf(mappingInfoFileName, "%s%d%s", "Maps/Offline/MappingInfo-refTh-", referenceNumberTH, ".txt");
+    //variables
+    Transporter recognizedTargetObjects, computedOutput, computedLocalMapOutput;
+    vector <double> coordTransInfo;
+    vector<Object> targetObjectsInMPV;
+    vector<Object> targetObjectsInPV, targetObjectsInCV, targetObjectsInMFIS;
+    vector<Object> allTargetObjectsInPV;
+    vector<Object> referenceObjects, odometricReferenceObject;
+    //vector<Object> currentRobotPositionInMFIS, odometricCRPositionInMFIS;
+    vector<Object> previousRobotPositionInMFIS;
+    vector<Object> recognizedTargetObjectInPV;
+    vector<Object> routeMap;
+    vector<Object> routeMapForOneASR;
+    vector<Object> routeMapConnLP; //route map simply connecting limiting points
+    Object pathFromLastLimitingPoint;
+    vector<vector<Object> > routeMapForallASR;
+    Object lastRouteMapNode, tempLastRouteMapNode;
+    vector <Object> allRobotPositions, allOdometricRPosition;
+    vector < vector<Object> >AllGlobalRobotPs;
+    vector< vector<Object> > allRPoseAtOneStep;
+    vector<Object> robotPositionsAtLimitingPoints;
+    Transporter objectForPlaceRecognition;
+    Transporter loopClosingInfo;
+    Transporter lastStepInfo;
+    vector<Object> refObjectForLoopClosing;
+    string environmentType = "unknown";
+    vector<int> lostPoints, limitingPoints, exitPoints, badLocalization;
+    Object lineOfSitePoint;
+    limitingPoints.push_back(v);
+    Object lastLocomotion;
+    vector<Object> wholeRoute;
+
+    int odoLocalizationUsed = 0;
+    ofstream outFile("Maps/Offline/LocalizationError.txt", ios::out);
+
+    vector<Exit> exitsFromCV;
+    vector<Object> crossedExit;
+
+    vector<Object> objectOfCurrentASR;
+    ASR currentASR;
+    ASRNetwork perceptualMap;
+    int ASRNumber = 1;
+
+    //currentLM_ID = potential_ID = 1;
+    
+    vector<ASR> places;
+
+    MyRobot myrobot(0, 0); 
+    currentRobotPositionInMFIS = myrobot.getRobot();
+    
+    switch_robot_position = currentRobotPositionInMFIS; //switch m1 robot position
+    
+    allRobotPositions = currentRobotPositionInMFIS;
+    AllGlobalRobotPs.push_back(allRobotPositions);
+    allOdometricRPosition = currentRobotPositionInMFIS; //just to see odometric robot position
+    odometricCRPositionInMFIS = currentRobotPositionInMFIS; //just to see odometric robot position
+    robotPositionsAtLimitingPoints = currentRobotPositionInMFIS;
+ 
+    ListOfPositions.push_back(currentRobotPositionInMFIS); // push the first position into a list
+
+    RobotPs.push_back(Point(currentRobotPositionInMFIS[6].X1(), currentRobotPositionInMFIS[6].Y1()));
+
+    //for routeMap
+    previousRobotPositionInMFIS = currentRobotPositionInMFIS;
+    lastRouteMapNode = currentRobotPositionInMFIS[6];
+    tempLastRouteMapNode = lastRouteMapNode;
+    routeMap.push_back(lastRouteMapNode);
+    routeMapForOneASR.push_back(lastRouteMapNode);
+    routeMapConnLP.push_back(Object(0, 0, 0, 0, 1));
+
+    routeMapCo.push_back(Object(0, 0, 0, 0, 1));
+    sprintf(viewFileName, "%s%d%s%d%s%d", levelName, level, "set", set, surfaceName, v);
+
+    //reading the first view
+    //cout << "........Reading " << viewFileName << endl;
+    vector <Object> currentView = readASCII(viewFileName);
+    
+    ALLlocalMapInGlobal.push_back(currentView);
+    
+    if (currentView.size() == 0)
+    {
+        //cout << "Need to change the file name" << endl;
+        surfaceName = "/surface-";
+        sprintf(viewFileName, "%s%d%s%d%s%d", levelName, level, "set", set, surfaceName, v);
+        currentView = readASCII(viewFileName);
+    }
+
+    //finding target objects
+    targetObjectsInMPV = targetObjectsInPV = findTargetObjects(currentView);
+    referenceObjects.push_back(targetObjectsInPV[0]); //bcz ref objects will be used in findNextDestination function
+    referenceObjects.push_back(targetObjectsInPV[0]);
+
+    PreLandmarks = targetObjectsInPV;
+
+    //tagging side and view number
+    currentView = tagObjectsAsSideAndViewNumber(currentView, v);
+
+    for (unsigned int i = 0; i < currentView.size(); i++)
+    {
+        currentView[i].setASRNo(v);
+        currentView[i].setLimitingPoint(v);
+        currentView[i].setLocalEnvID(v);
+    }
+
+    //initializing MFIS
+    vector<Object> MFIS = currentView;
+    
+    //added for chunk global map
+    vector<Object> ChunkGlobal = currentView;
+    
+    //cout << "..........MFIS.........." << endl;
+    displayObjects(MFIS);
+    //NewLM = currentView; // first local map
+    //GlobalLM = currentView;
+
+    allASR = currentView;
+    MapofLMs = NewLM; // the first local map in global
+
+    //currentPG = makePolygonOfCV(NewLM); // first local to generate polygon
+    //Memories.push_back(NewLM); //store the first local map as first memory
+    //currentTransLM = NewLM; // the first one does not to transform
+
+    exitsFromcurrentLM = findGapasExits(NewLM); // initial exits in first view/local environment
+
+    sprintf(viewFileName, "%s%d%s", "Maps/Offline/LocalMap-", v, ".png");
+    plotObjects(viewFileName, myrobot.getRobot(), NewLM);
+    
+    //--- Local map and chunk process ---//
+    //ALLlocalMap = NewLM;
+ 
+    //initialization of local maps
+    //LMS = TransViewIntoGloabl(ALLlocalMap, NewLM, Point (0,0), myrobot.getRobot(), 0, 1);
+    Global_ASR = currentView;
+    //robpositions.push_back(Point (currentRobotPositionInMFIS[6].X1(), currentRobotPositionInMFIS[6].Y1()));
+    robot_Positions.push_back(currentRobotPositionInMFIS);
+    robot_points.push_back(Point (currentRobotPositionInMFIS[6].X1(), currentRobotPositionInMFIS[6].Y1()));              
+    
+    views.push_back(currentView);           
+    id_group.push_back(v);  
+    
+    //-----------------------------------//
+    
+    for (int i = 0; i < exitsFromcurrentLM.size(); i++)
+        exitsFromcurrentLM[i].display();
+
+    //initializing Perceptual Map
+    objectOfCurrentASR = currentView;
+    currentASR.setASRObjects(objectOfCurrentASR);
+    currentASR.setASRExit1(Object(-500, 0, 500, 0));
+    currentASR.setASRID(1);
+    lineOfSitePoint = currentRobotPositionInMFIS[6];
+    currentASR.addLineOfSitePoints(currentRobotPositionInMFIS[6]);
+    perceptualMap.setCurrentASR(currentASR);
+
+
+    sprintf(mfisFileName, "%s%d%s", "Maps/Offline/MFIS-", v, ".png");
+    sprintf(viewFileName, "%s%d%s", "Maps/Offline/LocalEnv-", v, ".png");
+    plotObjectsOf3Kinds(viewFileName, allRobotPositions, targetObjectsInPV, currentView);
+    plotObjects(mfisFileName, allRobotPositions, MFIS);
+    
+    targetObjectsInMFIS = findTargetObjectsFromMFIS(MFIS);
+    
+    sprintf(viewFileName, "%s%d%s", "Maps/Offline/View-", v, ".png");
+    plotObjectsOf4Kinds(viewFileName, currentView, myrobot.getRobot(), targetObjectsInCV, recognizedTargetObjects.getTargetObjects());
+
+    vector<Object> errorMap = currentView; //odometric error map initialization
+
+    exitsFromCV = findShortestExits(currentView);
+            sprintf(mfisFileName, "%s%d%s", "Maps/Offline/view&exits-", 1, ".png");                   
+            plotObjectsOf3KindswithExits(mfisFileName, currentView, currentRobotPositionInMFIS, exitsFromCV);
+
+    vector<Point> updatingPoints;
+    updatingPoints.push_back(Point(0, 0));
+
+    bool exitCrossed = false;
+    crossedExit.push_back(currentRobotPositionInMFIS[5]); //consider home as a exit
+    crossedExit.back().setID(v);
+
+    vector<int> failedToRecognizeRef;
+    ofstream outFileForRefError("Maps/Offline/Localization", ios::out);
+    outFileForRefError << v << " " << 1 << endl;
+
+    //main loop
+    do
+    {
+        v++;
+        cout << "@ step " << v << endl;
+        
+        if(v == w)
+            lastloop_Flag = 1;
+        
+        //Read coordTrans Data
+        sprintf(ctFileName, "%s%d%s%d%s%d", levelName, level, "set", set, "/coordTrans-", v);
+        coordTransInfo = readCoordTrans(ctFileName);
+
+        traveledDistance = traveledDistance + coordTransInfo[0]; //The first element.
+        robotFacing = robotFacing + coordTransInfo[1];           //The second element.
+        
+      
+        //changing the filenames 
+        sprintf(viewFileName, "%s%d%s%d%s%d", levelName, level, "set", set, surfaceName, v);
+
+        currentView = readASCII(viewFileName);
+        if (currentView.size() == 0)
+        {
+            //cout << "Need to change the file name" << endl;
+            surfaceName = "/surface-";
+            sprintf(viewFileName, "%s%d%s%d%s%d", levelName, level, "set", set, surfaceName, v);
+            currentView = readASCII(viewFileName);
+        }
+    
+       
+        //if(function_switch_Flag == 2)
+        //    goto lb_pi;
+        
+        //odometricErrorMap(errorMap, currentView, coordTransInfo[0], coordTransInfo[1]); //computing error map
+        //finding Exits
+        exitsFromCV = findShortestExits(currentView);
+
+        //finding target objects
+        targetObjectsInCV = findTargetObjects(currentView);
+
+        LandMarkCV = findTargetObjects(currentView);
+
+        //recognizing target Objects
+        recognizedTargetObjects = recognizeTargetObjects(MFIS, targetObjectsInPV, targetObjectsInCV, coordTransInfo, v);
+
+        sprintf(viewFileName, "%s%d%s", "Maps/Offline/View-", v, ".png");
+        plotObjectsOf4Kinds(viewFileName, currentView, myrobot.getRobot(), targetObjectsInCV, recognizedTargetObjects.getTargetObjects());
+        //plotObjects(viewFileName, myrobot.getRobot(), currentView); 
+
+        currentView = tagObjectsAsSideAndViewNumber(currentView, v);
+        referenceObjects = recognizedTargetObjects.getReferenceObjects();
+
+        targetObjectsInMPV = targetObjectsInPV;
+  
+        if ((recognizedTargetObjects.getTargetObjects().size() < 4))
+        {
+            
+            if((v - limitingPoints.back()) > 1) //update at last step //retriving info to update at last step
+            {
+                    MFIS = lastStepInfo.getMFIS();
+                    //LocalMap = computedLocalMapOutput.getView();
+                    currentView = lastStepInfo.getView();
+                    referenceObjects = lastStepInfo.getReferenceObjects();
+                    currentRobotPositionInMFIS = lastStepInfo.getRobotPosition();
+                    
+                    if (referenceObjects.size() == 0)
+                    {
+                        cout << "trying to update at " << v - 1 << " but no ref: " << endl;
+                        waitHere();
+                    }
+                    
+                    v = v - 1;
+                    vt_counter++;
+                    
+            } 
+            else
+            {
+
+                if ((v - limitingPoints.back()) == 1) //update at this step
+                {
+
+                        //Check whether these two ref object are quite different        
+                        if(abs(referenceObjects[1].length()/referenceObjects[0].length()) > 3)
+                        {
+                            referenceObjects.clear(); // do not use these two ref object
+                        }
+
+                        
+                        if (referenceObjects.size() == 0)
+                        {
+                                //localization using odometer
+lb_pi:                          Object aLine = makeLineAtTwoPointsWithObject(coordTransInfo[1], coordTransInfo[0], coordTransInfo[1], coordTransInfo[0] + 500, currentRobotPositionInMFIS[6], 1);
+                                aLine.setKP(1);
+                                odometricReferenceObject.clear();
+                                odometricReferenceObject.push_back(aLine);
+                                odometricReferenceObject.push_back(allRobotPositions[6]);
+                                odometricCRPositionInMFIS = myrobot.inMFIS(odometricReferenceObject[0], odometricReferenceObject[1], odometricReferenceObject[0].getKP());
+                                referenceObjects = odometricReferenceObject;
+                                lostPoints.push_back(v); //just for printing at the end
+                                
+                                pi_counter++;
+                                PI_switch_Flag = 1; 
+                        }
+                        else
+                            vt_counter++;
+     
+                }
+     
+            }
+               
+
+            //localization 
+            PI_RobotPosition = Path_integrate_position(coordTransInfo, currentRobotPositionInMFIS, allRobotPositions);
+            currentRobotPositionInMFIS = myrobot.inMFIS(referenceObjects[0], referenceObjects[1], referenceObjects[0].getKP());               
+
+
+            
+            //dataset5-3 localise robot first
+            /*if(v == 134)
+            {
+                Object aLine;//
+                
+                double temp_x1, temp_y1, temp_x2, temp_y2;
+                
+                temp_x1 = sin(deg2rad(coordTransInfo[1]+14)) * coordTransInfo[0] + lastStepInfo.getRobotPosition()[6].X1();
+                temp_y1 = cos(deg2rad(coordTransInfo[1]+14)) * coordTransInfo[0] + lastStepInfo.getRobotPosition()[6].Y1();
+                temp_x2 = sin(deg2rad(coordTransInfo[1]+14)) * (coordTransInfo[0]+500) + lastStepInfo.getRobotPosition()[6].X1();
+                temp_y2 = cos(deg2rad(coordTransInfo[1]+14)) * (coordTransInfo[0]+500) + lastStepInfo.getRobotPosition()[6].Y1();
+                aLine.set(temp_x1, temp_y1, temp_x2, temp_y2,0);
+                aLine.setKP(1);
+                odometricReferenceObject.clear();
+                odometricReferenceObject.push_back(aLine);
+                odometricReferenceObject.push_back(allRobotPositions[6]);
+                currentRobotPositionInMFIS = myrobot.inMFIS(odometricReferenceObject[0], odometricReferenceObject[1], odometricReferenceObject[0].getKP());
+                referenceObjects = odometricReferenceObject;
+            }*/
+            
+            views.push_back(TransformforToGlobalCoordinate(currentView, PI_RobotPosition[6].getP1(), PI_RobotPosition, PI_RobotPosition[7].getAngleWithXaxis())); 
+            
+            
+            if((abs(distanceOftwoP(currentRobotPositionInMFIS[6].getP1(), PI_RobotPosition[6].getP1())/coordTransInfo[0]) > 3.0)
+                    //|| ((currentRobotPositionInMFIS[6].Y2() - currentRobotPositionInMFIS[6].Y1()) * (PI_RobotPosition[6].Y2() - PI_RobotPosition[6].Y1())) < 0)
+                 && ((v - limitingPoints.back()) == 1))
+            {
+                //currentRobotPositionInMFIS = PI_RobotPosition;
+                vt_counter--;
+                //pi_counter++;
+                
+                currentRobotPositionInMFIS = lastStepInfo.getRobotPosition();
+                goto lb_pi;
+                
+            }
+            
+      
+            currentRobotPositionInMFIS[6].setVN(v); 
+            robot_points.push_back(Point (currentRobotPositionInMFIS[6].X1(), currentRobotPositionInMFIS[6].Y1()));              
+
+            transformed_view = TransformforToGlobalCoordinate(currentView, currentRobotPositionInMFIS[6].getP1(), currentRobotPositionInMFIS, currentRobotPositionInMFIS[7].getAngleWithXaxis());   
+            
+            //exitsFromCV = findShortestExits(transformed_view);
+            //sprintf(mfisFileName, "%s%d%s", "Maps/Offline/View&Exit-",v,".png");                   
+            //plotObjectsOf3KindswithExits(mfisFileName, transformed_view, currentRobotPositionInMFIS,exitsFromCV);
+            
+            if(PI_switch_Flag == 1)
+            {
+                pair< vector<Object>, vector<Object> > further_adjust = constrain_path_integration(transformed_view, currentRobotPositionInMFIS,  
+                                                                                                   MFIS, v);
+                if(abs(distanceOftwoP(further_adjust.first[6].getP1(), PI_RobotPosition[6].getP1())/coordTransInfo[0]) < 2.0)
+                {
+                    currentRobotPositionInMFIS = further_adjust.first;
+                    transformed_view = further_adjust.second;
+                }
+                
+                PI_switch_Flag = 0;
+                
+            }
+
+            
+
+            
+            AllGlobalRobotPs.push_back(currentRobotPositionInMFIS);
+            ALLlocalMapInGlobal.push_back(transformed_view);
+            
+//            if(function_switch_Flag == 2)
+//            {
+//                /*if(v >= 110)
+//                {
+//                    vector<Object> current_view_Box = getBoundingBox(transformed_view);
+//                    
+//                    vector<Object> temp_adjust = TransformforToGlobalCoordinate(all_chunks_region_exit[1].get_regions_boundary()[1], Point (-600,0), currentRobotPositionInMFIS, 0);   
+//
+//                    vector<Object> earlier_region_box = getBoundingBox(temp_adjust);
+//                    
+//                    current_view_Box = addTwoVectorsOfObjects(current_view_Box, transformed_view);
+//                    earlier_region_box = addTwoVectorsOfObjects(earlier_region_box, temp_adjust);
+//                            
+//                    sprintf(mfisFileName, "%s%d%s", "Maps/Offline/Test_boxs-", v, ".png");                   
+//                    plotObjectsOf4Kinds(mfisFileName, MFIS, currentRobotPositionInMFIS, current_view_Box, earlier_region_box);
+//                    
+//                    double weith, length, ref_weith, ref_length;
+//                    ref_length = earlier_region_box[0].length() > earlier_region_box[1].length()? earlier_region_box[0].length() : earlier_region_box[1].length();
+//                    ref_weith = earlier_region_box[0].length() > earlier_region_box[1].length()? earlier_region_box[1].length(): earlier_region_box[0].length();
+//                    
+//                    length = current_view_Box[0].length() > current_view_Box[1].length()? current_view_Box[0].length() : current_view_Box[1].length();
+//                    weith = current_view_Box[0].length() > current_view_Box[1].length()? current_view_Box[1].length(): current_view_Box[0].length();
+//                    
+//                    if(abs(ref_length - length) < threshold)
+//                    {
+//                        //match and adjust earlier information onto current MFIS
+//                        double temp_x, temp_y, temp_angle;
+//                        vector<Object> temp_adjust = TransformforToGlobalCoordinate(all_chunks_region_exit[1].get_regions_boundary()[1], Point (-600,0), currentRobotPositionInMFIS, 0); 
+//                    }
+//                    
+//                }*/
+//                /*
+//                if(v>= 70)
+//                {
+//                    vector<Object> temp_region;
+//                    for(int m = ALLlocalMapInGlobal.size() - 1; m >= 0; m--)
+//                    {
+//                        temp_region = addTwoVectorsOfObjects(temp_region, ALLlocalMapInGlobal[m]);
+//                    }
+//
+//                    vector<Object> temp_region_boundary;
+//                    temp_region_boundary = makePolygon_Clipper(temp_region, 0);
+//                    correct_polygon(temp_region_boundary);
+//                    sprintf(mfisFileName, "%s%d%s", "Maps/Offline/test_region-", v, ".png");                   
+//                    plotObjectsOf4Kinds(mfisFileName, myrobot.getRobot(), currentRobotPositionInMFIS, temp_region, temp_region_boundary);
+//                }*/
+//                    
+//
+//                //compute bounding box based upon current view
+//                vector<Object> current_structure;
+//                
+//                //if(v >= 110)
+//                //{
+//                    vector<Exit> test_exit;
+//                    vector<Object> test_region1, test_region2, test_region3;
+//                    vector<Object> select_info;
+//                    
+//                    
+//                    test_exit.push_back(all_chunks_region_exit[0].get_exits()[4]);
+//                    test_region1 = addTwoVectorsOfObjects(all_chunks_region_exit[0].get_regions_boundary()[5], all_chunks_region_exit[0].get_regions_boundary().back());
+//                    test_region2 = getBoundingBox(test_region1);
+//                    test_region3 = addTwoVectorsOfObjects(test_region1,test_region2);
+//                    
+//                    current_structure = getBoundingBox(transformed_view);
+//                    current_structure = addTwoVectorsOfObjects(current_structure, transformed_view);
+//                
+//                    
+//                    vector<Surface> polygon = convertObjectToSurface(test_region2); 
+//                    for(int m = 0; m < last_step_MFIS.size(); m++)
+//                    {
+//                        if((pointInPolygon(PointXY(last_step_MFIS[m].X1(), last_step_MFIS[m].Y1()), polygon) == true ||
+//                                pointInPolygon(PointXY(last_step_MFIS[m].X2(), last_step_MFIS[m].Y2()), polygon) == true))
+//                        {
+//                            select_info.push_back(last_step_MFIS[m]);
+//                        }
+//                    }
+//                    select_info = addTwoVectorsOfObjects(select_info, test_region2);
+//                    //parallel sides of box
+//                    vector<Object> test_temp1 = TransformforToGlobalCoordinate(test_region1, Point (8200,300), currentRobotPositionInMFIS, -28);
+//                    vector<Object> test_temp2 = TransformforToGlobalCoordinate(test_region2, Point (8200,300), currentRobotPositionInMFIS, -28);
+//
+//                    //compute the exit 
+//                    test_exit = Transform_Exit_GlobalCoordinate(test_exit, Point (8200,300), currentRobotPositionInMFIS, -28);
+//                    vector<Object> convert_type_exit  = convertExitToObject(test_exit);
+//                    //find the closest side on reference box
+//                    
+//                    
+//                    //project all information of MFIS1
+//                    //vector<Exit>  projectingTheExit(all_chunks_region_exit[0].get_exits(), )
+//                    
+//                    sprintf(mfisFileName, "%s%d%s", "Maps/Offline/test_region-", v, ".png");                   
+//                    plotObjectsOf4Kinds(mfisFileName,  MFIS, test_temp2, convert_type_exit, test_temp1);
+//                    //plotObjectsOf4Kinds(mfisFileName, currentRobotPositionInMFIS, MFIS, select_info, convert_type_exit);
+//                //}
+//                
+//                
+//            }
+            
+            
+            //compute arrow based on robot's orientation
+            //robot_orientation_arrow = drawArrow(currentRobotPositionInMFIS[6], v);
+
+            allRobotPositions = addTwoVectorsOfObjects(allRobotPositions, currentRobotPositionInMFIS); 
+
+
+            
+            /*===========================================================================================*/
+            //routeMap
+            pathFromLastLimitingPoint.set(routeMapConnLP.back().X2(), routeMapConnLP.back().Y2(),
+                    currentRobotPositionInMFIS[6].X1(), currentRobotPositionInMFIS[6].Y1(), v);
+            routeMapConnLP.push_back(pathFromLastLimitingPoint);
+
+            robotPositionsAtLimitingPoints = addTwoVectorsOfObjects(robotPositionsAtLimitingPoints, currentRobotPositionInMFIS);
+
+            updatingPoints.push_back(Point(currentRobotPositionInMFIS[6].X1(), currentRobotPositionInMFIS[6].Y1()));
+
+            computedOutput = updatePerceptualMapATPlaceDeletion_version3(places, MFIS, currentView, currentRobotPositionInMFIS,
+                     allRobotPositions, referenceObjects, v, ASRNumber, exitCrossed, crossedExit, routeMapConnLP, expect_Flag);
+
+            MFIS = computedOutput.getView();
+
+            places = computedOutput.getASRs();
+            targetObjectsInPV = computedOutput.getTargetObjects();
+
+            robot_Positions.push_back(currentRobotPositionInMFIS);           
+            id_group.push_back(v);     
+
+
+            limitingPoints.push_back(v); //limiting/updating points just for printing at the end
+
+            //exitsFromCV = findShortestExits(transformed_view);
+            //sprintf(mfisFileName, "%s%d%s", "Maps/Offline/view&exits-", v, ".png");                   
+            //plotObjectsOf3KindswithExits(mfisFileName, transformed_view, currentRobotPositionInMFIS, exitsFromCV);
+            
+            //to print local and global map
+            sprintf(mfisFileName, "%s%d%s", "Maps/Offline/MFIS-", v, ".png");                   
+            plotObjectsOf3Kinds(mfisFileName, myrobot.getRobot(), currentRobotPositionInMFIS, MFIS);
+            
+
+            recognizedTargetObjectInPV = recognizedTargetObjects.getTargetObjects();
+
+            //sprintf(mfisFileName, "%s%d%s", "Maps/Offline/Arrows_and_positions_map-", v, ".png");
+            //plotObjectsColours(mfisFileName, all_arrows, allRobotPositions, environment_map);
+            //plotObjects(mfisFileName, myrobot.getRobot(), currentRobotPositionInMFIS, last_environment_map);
+            //plotObjects(mfisFileName, allRobotPositions, environment_map);
+            
+            //modification by Lyn
+            /*if(function_switch_Flag == 2)
+            {
+//                if(twoLinintersect(currentRobotPositionInMFIS[6].getP1(),  lastStepInfo.getRobotPosition()[6].getP1(),
+//                                       current_region_exit.getP1(), current_region_exit.getP2()) == true)
+//                {
+//                    //sprintf(mfisFileName, "%s%d%s", "Maps/Offline/Travel_between_region-", v, ".png");
+//                    //plotObjectsOf3Kinds(mfisFileName, currentRobotPositionInMFIS, MFIS, transformed_view);
+//                    
+//                    //cout << " just crossed an exit here !!! " << endl;
+//                    //cout << " Entry another region !!! " << endl;
+//                    
+//                     
+//                    
+//                    //for data4level12
+////                    if(v == 37)
+////                    {
+////                        
+////                                            vector<Exit> test;
+////                    vector<Object> test_region;
+////                    test.push_back(regions_exits.get_exits()[regions_exits.get_exits().size()-2]);
+////                    test_region = regions_exits.get_regions_boundary()[regions_exits.get_regions_boundary().size()-2];
+////                    
+////                    sprintf(mfisFileName, "%s%d%s", "Maps/Offline/Current_MFIS_and_Exit-", v, ".png");                   
+////                    plotObjectsOf3KindswithExits(mfisFileName,test_region, MFIS, test);
+////                        waitHere();
+////                        test_region = TransformforToGlobalCoordinate(test_region, Point (-100, 85), currentRobotPositionInMFIS, -4.5);
+////                        test = Transform_Exit_GlobalCoordinate(test, Point (-100, 85), currentRobotPositionInMFIS, -4.5);
+////                        current_region_exit = test[0];
+////                        sprintf(mfisFileName, "%s%d%s", "Maps/Offline/Current_MFIS_and_Exit-", v, ".png");                   
+////                        plotObjectsOf3KindswithExits(mfisFileName,test_region, MFIS, test);
+////                    }
+////                    
+////                    if(v == 40)
+////                    {
+////                                                                  vector<Exit> test;
+////                    vector<Object> test_region;
+////                    test.push_back(regions_exits.get_exits()[regions_exits.get_exits().size()-3]);
+////                    test_region = regions_exits.get_regions_boundary()[regions_exits.get_regions_boundary().size()-3];
+////                    
+////                    sprintf(mfisFileName, "%s%d%s", "Maps/Offline/Current_MFIS_and_Exit-", v, ".png");                   
+////                    plotObjectsOf3KindswithExits(mfisFileName,test_region, MFIS, test);
+////                        waitHere();
+////                        
+////                        test_region = TransformforToGlobalCoordinate(test_region, Point (-300, 0), currentRobotPositionInMFIS, -8.6);
+////                        test = Transform_Exit_GlobalCoordinate(test, Point (-300, 0), currentRobotPositionInMFIS, -8.6);
+////                        current_region_exit = test[0];
+////                        sprintf(mfisFileName, "%s%d%s", "Maps/Offline/Current_MFIS_and_Exit-", v, ".png");                   
+////                        plotObjectsOf3KindswithExits(mfisFileName,test_region, MFIS, test);
+////                    }
+//                
+//                }
+              
+                
+                /////////////////
+                
+                if(expectation_flag == 0)
+                {
+                        current_region_exit = regions_exits.get_exits()[regions_exits.get_exits().size()-3];
+
+                        if(interSectWithLine(transformed_view, current_region_exit.getP1(), current_region_exit.getP2()) == true)
+                        {
+                                //from this step, it will need to adjust this key exit position
+                                Object ref_obj = intersectForObject(transformed_view, current_region_exit.getP1(), current_region_exit.getP2());
+                                Exit temp_exit1 = Transform_Exit_GlobalCoordinate(current_region_exit, Point (ref_obj.X1() - current_region_exit.X1(), ref_obj.Y1() - current_region_exit.Y1()), 0);
+                                Exit temp_exit2 = Transform_Exit_GlobalCoordinate(current_region_exit, Point (ref_obj.X2() - current_region_exit.X2(), ref_obj.Y2() - current_region_exit.Y2()), 0);
+
+                                possible_exits_in_MFIS.push_back(temp_exit1); //endpoint1 is fixed
+                                possible_exits_in_MFIS.push_back(temp_exit2); //endpoint2 is fixed
+                                sprintf(mfisFileName, "%s%d%s", "Maps/Offline/Current_MFIS_and_Exit-", v, ".png");                   
+                                plotObjectsOf3KindswithExits(mfisFileName,currentRobotPositionInMFIS, MFIS, possible_exits_in_MFIS);
+
+                                expectation_flag = 1;
+
+                        }
+                }
+                else
+                {
+                        //adjust potential exits 
+                        
+                        vector<Point> potent_p1_for_exit2, potent_p2_for_exit1;
+
+                        vector<Point> conv_point = ObjectToPoints(transformed_view);
+                        for(int m = 0; m < conv_point.size(); m++)
+                        {
+                                Point potential_p1, potential_p2;
+
+                                if(distanceOftwoP(conv_point[m], possible_exits_in_MFIS[0].getP2()) < 600)
+                                    potent_p2_for_exit1.push_back(conv_point[m]);
+
+                                if(distanceOftwoP(conv_point[m], possible_exits_in_MFIS[1].getP1()) < 600)
+                                    potent_p1_for_exit2.push_back(conv_point[m]);
+
+                        }
+
+                        if(potent_p2_for_exit1.size()>0)
+                        {
+                                Point min_point = min_distance(potent_p2_for_exit1, possible_exits_in_MFIS[0].getP2());
+                                possible_exits_in_MFIS[0].set(possible_exits_in_MFIS[0].X1(), possible_exits_in_MFIS[0].Y1(), min_point.X(), min_point.Y());
+                        }
+
+                        if(potent_p1_for_exit2.size()>0)
+                        {
+                                Point min_point = min_distance(potent_p1_for_exit2, possible_exits_in_MFIS[1].getP1());
+                                possible_exits_in_MFIS[1].set(min_point.X(), min_point.Y(), possible_exits_in_MFIS[1].X2(), possible_exits_in_MFIS[1].Y2());
+                        }
+
+                        //sprintf(mfisFileName, "%s%d%s", "Maps/Offline/Current_MFIS_and_Exit-", v, ".png");                   
+                        //plotObjectsOf3KindswithExits(mfisFileName,MFIS, transformed_view , possible_exits_in_MFIS);
+                        //if(exit_in_region.size() > 1)
+                        //    plotObjectsOf3KindswithExits(mfisFileName,MFIS, transformed_view , exit_in_region);
+                        
+                        
+                        //As moving, there is a point where robot can't see the exit
+                        if((isLeft(currentRobotPositionInMFIS[7].getP1(), currentRobotPositionInMFIS[7].getP2(), possible_exits_in_MFIS[1].getmidPoint()) < 1)
+                            && (exit_in_region.size() < 1))
+                        {
+                            
+                            //form an exit at this place
+                            Exit temp_form_exit; 
+                            
+                            vector<Point> temp_conver = ObjectToPoints(ALLlocalMapInGlobal.back());
+                            temp_form_exit.set(temp_conver[0].X(), temp_conver[0].Y(), temp_conver.back().X(), temp_conver.back().Y());
+                            
+                            exit_in_region.push_back(possible_exits_in_MFIS[1]);
+                            exit_in_region.push_back(temp_form_exit);
+                            //sprintf(mfisFileName, "%s%d%s", "Maps/Offline/Current_MFIS_and_Exit-", v, ".png");                   
+                            //plotObjectsOf3KindswithExits(mfisFileName,MFIS, transformed_view , exit_in_region);
+                            
+                            
+                        }
+                        
+                        //if the robot cross one of the exit
+                        if(exit_in_region.size() > 1)
+                        {
+                            Object temp_path;
+                            temp_path.set(lastStepInfo.getRobotPosition()[6].X1(), lastStepInfo.getRobotPosition()[6].Y1(), currentRobotPositionInMFIS[6].X1(), currentRobotPositionInMFIS[6].Y1(), 0);
+
+                            if(twoLinintersect(temp_path.getP1(), temp_path.getP2(), exit_in_region[0].getP1(), exit_in_region[0].getP2()) == true)
+                            {
+                                cout << " At this step, robot crossed the major exit !! " << endl;
+                                pair< vector<Object>, vector<Object> > reorient_info = find_orientation_at_place(MFIS, all_chunks[0], currentRobotPositionInMFIS, exit_in_region[0], current_region_exit); 
+                                //find_orientation_at_place(MFIS, all_chunks[0], exit_in_region[0], current_region_exit); 
+                                
+                 
+                                MFIS = reorient_info.first;
+                                currentRobotPositionInMFIS = reorient_info.second;
+                                allRobotPositions = addTwoVectorsOfObjects(allRobotPositions, currentRobotPositionInMFIS); 
+
+                                
+                                //reset reference objects
+                         
+                                
+                                sprintf(mfisFileName, "%s%d%s", "Maps/Offline/MFIS-", v, ".png");                   
+                                plotObjectsOf3Kinds(mfisFileName, myrobot.getRobot(), currentRobotPositionInMFIS, MFIS);
+
+                                //switch back to function 1
+                                function_switch_Flag = 1;
+                            }
+                        }
+                }
+
+            }*/
+
+            
+            if((function_switch_Flag == 2) && (expectation_flag == 0)) //insdie a familiar space
+            {
+                sides_of_geo = rotate_on_point(sides_of_geo, sides_of_geo[3].getP1(), -0.8);
+                //sprintf(mfisFileName, "%s%d%s", "Maps/Offline/robot_and_view-", v, ".png");                   
+                //plotObjectsOf3Kinds(mfisFileName, currentRobotPositionInMFIS, transformed_view, sides_of_geo);
+                
+                if(interSectWithLine(sides_of_geo, currentRobotPositionInMFIS[6].getP1(), lastStepInfo.getRobotPosition()[6].getP1()) == true)
+                {
+                    cout << " It's moved out from previous space !! " << endl;
+                    function_switch_Flag = 1;
+                    expectation_flag = 1;
+                    
+                    Object move_out_side = intersectForObject(current_regions.back(), currentRobotPositionInMFIS[6].getP1(), lastStepInfo.getRobotPosition()[6].getP1());
+                    current_exit_side = move_out_side;
+                    
+                    vector<Object> test;
+                    test.push_back(move_out_side);
+                    sprintf(mfisFileName, "%s%d%s", "Maps/Offline/robot_and_view-", v, ".png");                   
+                    plotObjectsOf4Kinds(mfisFileName, currentRobotPositionInMFIS, transformed_view, current_regions.back(), test);
+                    
+                    //select info on that side
+                    last_region_exit = find_exit_cross(MFIS, move_out_side, lastStepInfo.getRobotPosition(), currentRobotPositionInMFIS);
+                    
+
+                    
+                    waitHere();
+                    
+                    
+                }
+                    
+            }
+            else
+            {
+                if((function_switch_Flag == 2) &&(expectation_flag == 1)) // not inside a familiar space
+                {
+                    //form an intermediate geometry's boundary lines 
+                    Object line1, line2;
+                    Object boundary1, boundary2;
+                    
+                    line1 = current_regions.back()[1];
+                    line2 = current_regions[current_regions.size()-2][0];
+                    
+                    Point temp_p = intersectPointTwolineEquations(line1, line2);
+                    boundary1.set(line1.X1(), line1.Y1(), temp_p.X(), temp_p.Y(), 0);
+                    boundary2.set(line2.X1(), line2.Y1(), temp_p.X(), temp_p.Y(), 1);
+                    
+                    //vector<Object> temp_boundary;
+                    //temp_boundary.push_back(boundary1);
+                    //temp_boundary.push_back(boundary2);
+                    //sprintf(mfisFileName, "%s%d%s", "Maps/Offline/robot_and_view-", v, ".png");                   
+                    //plotObjectsOf5Kinds(mfisFileName, currentRobotPositionInMFIS, MFIS, current_regions.back(), current_regions[current_regions.size()-2], temp_boundary);
+                    //waitHere();
+                    
+                    if(twoLinintersect(boundary1.getP1(), boundary1.getP2(), currentRobotPositionInMFIS[6].getP1(), lastStepInfo.getRobotPosition()[6].getP1()) == true)
+                        
+                    {
+                        vector<Object> group1, group2;
+                        
+                        for(int m = 0; m < MFIS.size(); m++)
+                        {
+                            if((boundary2.distP1ToP1(MFIS[m]) < 2000) || (boundary2.distP1ToP2(MFIS[m]) < 2000))
+                                group1.push_back(MFIS[m]);
+                            else
+                            {
+                                if((boundary2.distP2ToP1(MFIS[m]) < 2000) || (boundary2.distP2ToP2(MFIS[m]) < 2000))
+                                    group2.push_back(MFIS[m]);
+                            }
+                        }
+                        
+                        //compute the rough position of the exit
+                        last_region_exit = shortestExit(group1, group2);
+                        
+                        vector<Exit> plot_exit;
+                        plot_exit.push_back(last_region_exit);
+                        sprintf(mfisFileName, "%s%d%s", "Maps/Offline/robot_and_view_and_exit-", v, ".png");                   
+                        plotObjectsOf3KindswithExits(mfisFileName, MFIS, current_regions.back(), plot_exit);
+                        
+                        //find the gap it is to cross
+                        vector<Object> left_cluster, right_cluster;
+                        Exit to_cross_gap, project_gap;
+                        
+                        
+                        
+                        //compute the potential gap on left side
+                        
+                        
+                        familiar_flag = 1;
+                        function_switch_Flag = 1;
+                        expectation_flag = 0;
+                        waitHere();
+                    }
+
+                }
+            }
+            
+            if(familiar_flag == 1)
+            {
+                if(twoLinintersect(last_region_exit.getP1(), last_region_exit.getP2(), currentRobotPositionInMFIS[6].getP1(), lastStepInfo.getRobotPosition()[6].getP1()) == true)
+                {
+                    cout << " it is coming back to the first geometry ! " << endl;
+                    cout << " current step @: " << v << endl;
+                    
+                    vector<Object> ASR_to_find_geometry = ALLlocalMapInGlobal[ALLlocalMapInGlobal.size() - 2]; // last step ASR
+                    Object correspond_ref_line = base_line_for_geometry(ASR_to_find_geometry, AllGlobalRobotPs[AllGlobalRobotPs.size() - 2], last_region_exit);
+                    correspond_ref_line.reverse();
+                    
+                    
+                    //find the geometry in current view
+                    vector<Object> project_geometry = projectingTheView(current_regions[current_regions.size()-3], correspond_ref_line, current_regions[current_regions.size()-3][3], 1);
+                    
+                    //find the exit on MFIS
+                    vector<Object> group1 = collect_object_base_side(transformed_view, project_geometry[0]);
+                    vector<Object> group2 = collect_object_base_side(transformed_view, project_geometry[1]);
+                    
+                    Exit tracked_exit = most_constrain_gap(group1, group2);
+                    
+                    Object convert1, convert2;
+                    
+                    convert1.set(tracked_exit.X1(), tracked_exit.Y1(), tracked_exit.X2(), tracked_exit.Y2(), 0);
+                    convert2.set(all_chunks_region_exit[0].get_exits()[all_chunks_region_exit[0].get_exits().size()-3].X1(), all_chunks_region_exit[0].get_exits()[all_chunks_region_exit[0].get_exits().size()-3].Y1(),
+                                      all_chunks_region_exit[0].get_exits()[all_chunks_region_exit[0].get_exits().size()-3].X2(), all_chunks_region_exit[0].get_exits()[all_chunks_region_exit[0].get_exits().size()-3].Y2(), 0);
+                    
+                    convert1.reverse();
+                    vector<Object> adjust_early_mfis = projectingTheView(all_chunks[0], convert1, convert2,  1);
+                    project_memory = adjust_early_mfis;
+                    
+                    vector<Exit> temp_plot;
+                    temp_plot.push_back(tracked_exit);
+                    sprintf(mfisFileName, "%s%d%s", "Maps/Offline/robot_and_view_and_exit-", v, ".png");                   
+                        plotObjectsOf3KindswithExits(mfisFileName, transformed_view, project_geometry, temp_plot);
+                        waitHere();
+                    //project all information of MFIS1 onto current MFIS
+                    
+                    //reset all flags
+                    familiar_flag = 1;
+                    function_switch_Flag = 1;
+                    expectation_flag = 0;
+                    
+                }
+                
+                if(project_memory.size() != 0)
+                {
+                    sprintf(mfisFileName, "%s%d%s", "Maps/Offline/robot_and_view_and_exit-", v, ".png");                   
+                    plotObjectsOf3Kinds(mfisFileName, MFIS, project_memory, currentRobotPositionInMFIS);
+                }
+            }
+     
+        } 
+        else
+        {
+            targetObjectsInPV = recognizedTargetObjects.getTargetObjects();
+            PreLandmarks = computeRe.getTargetObjects();
+        }
+
+                    
+        if((computedOutput.getChunkFlag() == 1) && (function_switch_Flag == 1))//&&((v - last_Chunk_step) > 10))    
+        {
+
+                
+                //int cnt = 0;
+                regions_exits = bounded_space_version2(AllGlobalRobotPs, ALLlocalMapInGlobal);
+                all_chunks_region_exit.push_back(regions_exits);
+                
+                environment_map = region_geometry(regions_exits.get_regions_boundary(), regions_exits.get_exits());
+                
+                //geometry_map = exit_and_region_along_path(ALLlocalMapInGlobal, AllGlobalRobotPs, MFIS);
+                //geometry_boundary = makePolygon_Clipper(geometry_map,0);
+                
+                //form geometry 
+                adjust_info = update_geo_map(ALLlocalMapInGlobal, AllGlobalRobotPs);
+                sides_of_geo =  getBoundingBox(adjust_info.first);
+                sides_of_geo.pop_back();
+                
+                if(chunk_cnt == 0)
+                {
+                    sides_of_geo = adjust_box_temporary(sides_of_geo);
+                    expectation_flag = 0; //inside geometry
+                }
+                else
+                {
+                    if(chunk_cnt == 1)
+                    {
+                        sides_of_geo =  adjust_box_temporary_2(sides_of_geo, transformed_view);
+                        expectation_flag = 1; //ouside geometry
+                    }
+                }
+                current_regions.push_back(sides_of_geo);
+                //clusters =  cluster_objects_follow_path(adjust_info.first, sides_of_geo);
+                sprintf(mfisFileName, "%s%d%s", "Maps/Offline/EnduringMap-", v, ".png");                   
+                plotObjectsOf3Kinds(mfisFileName, adjust_info.first, adjust_info.second, current_regions.back());  
+            
+                //check if inside the geometry or not
+                //if(robot is inside the last geometry)
+                //    expectation_flag = 0; //inside geometry
+                //else
+                //    expectation_flag = 1; //ouside geometry
+                
+                
+                /*if(function_switch_Flag == 1)
+                {
+                    do
+                    {
+                        int colle_regions_size = regions_exits.get_regions_boundary().size() - 1;
+                        last_chunk_regions.push_back(regions_exits.get_regions_boundary()[colle_regions_size - cnt]);
+                        cnt++;
+                    }while(cnt <= 4);
+                    function_switch_Flag = 2;
+                    
+                    Exit close_exit;
+                    vector<Object> trim_region;
+                    
+                    for(int counter = 0; counter < last_chunk_regions.size()-1; counter++)
+                        trim_region = addTwoVectorsOfObjects(trim_region, last_chunk_regions[counter]);
+
+                    
+                    trim_region = clear_map(trim_region);
+                                    
+                    vector<Object> bounding_box = getBoundingBox(trim_region);
+                    trim_region = bounded_surfaces(trim_region, bounding_box);
+                    vector<Object> rough_bound_line = join_boundary_verison2(trim_region, close_exit);
+                    
+                    sprintf(mfisFileName, "%s", "Maps/Offline/regions_and_exits.png");                   
+                    plotObjectsOf3Kinds(mfisFileName, trim_region, bounding_box, rough_bound_line);
+                    
+                }
+                else
+                {
+                    do
+                    {
+                        current_regions.push_back(regions_exits.get_regions_boundary()[cnt]);
+                        cnt++;
+                    }while(cnt <= 4);
+                    
+                    Exit close_exit;
+                    vector<Object> trim_region;
+                    
+                    for(int counter = 0; counter < current_regions.size()-1; counter++)
+                        trim_region = addTwoVectorsOfObjects(trim_region, current_regions[counter]);
+
+                    
+                    trim_region = clear_map(trim_region);
+                                    
+                    vector<Object> bounding_box = getBoundingBox(trim_region);
+                    //trim_region = bounded_surfaces(trim_region, bounding_box);
+                    vector<Object> rough_bound_line = join_boundary_verison2(trim_region, close_exit);
+                    
+                    cout << " Try to recognize a familiar space ~~ " << endl;
+                    sprintf(mfisFileName, "%s", "Maps/Offline/regions_and_exits.png");                   
+                    //plotObjectsColoursAndExits(mfisFileName, current_regions, last_step_MFIS, regions_exits.get_exits());
+                    plotObjectsOf3Kinds(mfisFileName, trim_region, bounding_box, rough_bound_line);
+                    waitHere();
+                    
+                    //reset
+                    last_chunk_regions.clear();
+                    last_chunk_regions = current_regions;
+                    
+                }*/
+//
+////                if(v > 66)
+////                {
+////                    function_switch_Flag = 2;
+////                    
+////                    vector<Exit> test;
+////                    vector<Object> test_region;
+////                   test.push_back(regions_exits.get_exits().back());
+////
+////                    test_region = TransformforToGlobalCoordinate(regions_exits.get_regions_boundary().back(), Point (400, 0), currentRobotPositionInMFIS, -1);
+////                    test = Transform_Exit_GlobalCoordinate(test, Point (400, 0), currentRobotPositionInMFIS, -1);
+////                    current_region_exit = test[0];
+////
+////                    sprintf(mfisFileName, "%s%d%s", "Maps/Offline/Current_MFIS_and_Exit-", v, ".png");                   
+////                    plotObjectsOf3KindswithExits(mfisFileName,test_region, MFIS, test);
+////                    //plotObjectsColoursAndExits(mfisFileName, regions_exits.get_regions_boundary(), myrobot.getRobot(),regions_exits.get_exits());
+////
+////                    //combined the last and second last regions
+////                    
+////                }
+////                else
+////                    function_switch_Flag = 1; 
+//                
+                //storage current MFIS
+                all_chunks.push_back(MFIS);
+                last_step_MFIS = MFIS;
+                last_Chunk_step = v;
+                
+                vector<Object> path_in_mfis = pointsToObjects(robot_points);
+                all_chunk_path.push_back(path_in_mfis);
+                //before_start_number++;
+
+                cout << " size of input: " <<ALLlocalMapInGlobal.size() << endl;
+                //reset method 1 here
+                MFIS = transformed_view;
+                AllGlobalRobotPs.clear();
+                ALLlocalMapInGlobal.clear();
+                allRobotPositions.clear();
+                referenceObjects.clear();
+                robot_points.clear();        
+                Memories.clear();
+                
+                allRobotPositions = myrobot.getRobot();
+                referenceObjects.push_back(targetObjectsInCV[0]);
+                referenceObjects.push_back(targetObjectsInCV[0]);
+//                
+//                for(int m = 0; m < regions_exits.get_regions_boundary().size(); m++)
+//                {
+//                    //for plo3tting
+//                    all_resions.push_back(regions_exits.get_regions_boundary()[m]);
+//                    ALLlocalMap = addTwoVectorsOfObjects(ALLlocalMap, regions_exits.get_regions_boundary()[m]);
+//                }
+//                
+//                
+////                 //// all test codes
+////                if(v == 66)
+////                {
+////                    GlobalLM = addTwoVectorsOfObjects(all_resions[6], all_resions[7]);
+////                    all_resions.clear();
+////                }
+////                if(v >= 153)
+////                {
+////                    vector< vector<Object> > regions_outline, regions_map, test_groups;
+////                    
+////                        all_resions.insert(all_resions.begin()+all_resions.size()-1,last_Chunk_Map);
+////                        for(int m = 0; m < all_resions.size()-1; m++)
+////                        {
+////                                vector<Object> test_region, trim_region, oring;
+////                                Exit constrain_exit, close_exit;
+////                                vector<Exit> regions_exits;
+////                                
+////                                if(m == 1)
+////                                {
+////                                    all_resions[m+1] = TransformforToGlobalCoordinate(all_resions[m+1], Point (-5000,-1700), currentRobotPositionInMFIS, 14);
+////                                    sprintf(mfisFileName, "%s%d%s", "Maps/Offline/Test_regions_individual", m, ".png");                   
+////                                    plotObjects(mfisFileName, all_resions[m], GlobalLM);
+////                                }
+////                                else
+////                                {
+////                                    if(m==2)
+////                                    {
+////                                        oring = all_resions[m+1];
+////                                        all_resions[m+1] = TransformforToGlobalCoordinate(all_resions[m+1], Point (-6800,-2500), currentRobotPositionInMFIS, 22);
+////                                    }
+////                                    sprintf(mfisFileName, "%s%d%s", "Maps/Offline/Test_regions_individual", m, ".png");                   
+////                                    plotObjects(mfisFileName, all_resions[m+1], all_resions[m]);
+////                                }
+////                                
+////                                switch(m)
+////                                {
+////                                    case 1:constrain_exit.set(-2500, -15000, 2500, -10000);
+////                                           close_exit.set(4222.66, -10981.5, 3145.26, -10555.6);
+////                                           regions_exits.push_back(constrain_exit); break;
+////                                    case 2:constrain_exit.set(-3700,-5700, 4700, -7500);
+////                                            regions_exits.push_back(constrain_exit);
+////                                            constrain_exit.set(-2500, -15000, 2500, -10000);
+////                                            regions_exits.push_back(constrain_exit);break;
+////                                    case 3:constrain_exit.set(6700, -3000, 7500, -4800);
+////                                            regions_exits.push_back(constrain_exit);
+////                                            constrain_exit.set(-1000,-6000, 4700, -7500);
+////                                            regions_exits.push_back(constrain_exit);break;
+////                                    case 4:constrain_exit.set(9500, -5200, 7000, -5500);
+////                                            regions_exits.push_back(constrain_exit);
+////                                            constrain_exit.set(6700, -3000, 7500, -4800);
+////                                            regions_exits.push_back(constrain_exit);break;
+////                                    case 5://constrain_exit.set(8000, -8000, 6000, -5000);
+////                                        constrain_exit.set(6000, -13000, 0, -6800);
+////                                            regions_exits.push_back(constrain_exit);
+////                                            constrain_exit.set(9700, -4100, 6000, -4700);
+////                                            regions_exits.push_back(constrain_exit);break;
+////                                    //case 6:constrain_exit.set(6000, -13000, 0, -6800);
+////                                    //        regions_exits.push_back(constrain_exit);
+////                                    //        constrain_exit.set(8000, -8000, 6000, -5000);
+////                                    //        regions_exits.push_back(constrain_exit);break;
+////                                }
+////
+////
+////                                if(m == 1)
+////                                {
+////                                   test_region = addTwoVectorsOfObjects(GlobalLM, all_resions[m+1]);
+////                                }
+////                                else
+////                                {
+////                                    test_region = addTwoVectorsOfObjects(all_resions[m], all_resions[m+1]);
+////                                    if(m==2)
+////                                        all_resions[m+1] = oring;
+////                                }
+////                                
+////
+////                                if((m >= 1) && (m <= 5))
+////                                {
+////
+////                                    trim_region = trim_region_map(test_region, regions_exits);
+////                                    trim_region = clear_map(trim_region);
+////                                    
+////                                    vector<Object> bounding_box = getBoundingBox(trim_region);
+////                                    trim_region = bounded_surfaces(trim_region, bounding_box);
+////                                    vector<Object> rough_bound_line = join_boundary_verison2(trim_region, close_exit);
+////                                    
+////                                    vector<Object> imagined_boundary, solid_boundary;
+////                                    vector<Object> test_combined_boundary;
+////                                    
+////                                    for(int m = 0; m < rough_bound_line.size(); m++)
+////                                    {
+////                                        if(rough_bound_line[m].get_imagined_flag() == 1)
+////                                        {
+////                                            imagined_boundary.push_back(rough_bound_line[m]);
+////                                            if(rough_bound_line[m].length() > 5000)
+////                                                imagined_boundary.pop_back();
+////                                        }
+////                                        else
+////                                            solid_boundary.push_back(rough_bound_line[m]);
+////                                    }
+////                                    imagined_boundary = breakTheLinesInto(imagined_boundary);
+////                                    test_combined_boundary = addTwoVectorsOfObjects(solid_boundary, imagined_boundary);
+////                                    
+////                                    test_groups.push_back(test_combined_boundary);
+////                                            
+////                                    regions_map.push_back(trim_region);
+////                                    regions_outline.push_back(rough_bound_line);
+////                                    
+////                                    sprintf(mfisFileName, "%s%d%s", "Maps/Offline/bound_poly_surface-", m, ".png");                   
+////                                    plotObjects(mfisFileName, trim_region, bounding_box);
+////                                    sprintf(mfisFileName, "%s%d%s", "Maps/Offline/bound_poly_outlines-", m, ".png");                   
+////                                    plotObjects(mfisFileName, rough_bound_line, bounding_box);
+////                                    //sprintf(mfisFileName, "%s%d%s", "Maps/Offline/region_and_exits-", m, ".png");                   
+////                                    //plotObjectsofexits(mfisFileName, test_region, regions_exits);
+////                                    
+//////                                    char region_file[50];
+//////                                    sprintf(region_file, "%s%d", "inputData/Chunks/region_map", m);    
+//////                                    writeASCII(trim_region, region_file);
+//////                      
+//////                                    sprintf(region_file, "%s%d", "inputData/Chunks/region_map", m);
+//////                                    vector<Object> test_test = readASCII(region_file);
+//////
+//////                                    sprintf(mfisFileName, "%s%d%s", "Maps/Offline/read_region_map", m, ".png");                   
+//////                                    plotObjects(mfisFileName, test_test);
+//////                                    
+////                                    waitHere();
+////                                }
+////
+////                        }                
+////                        
+////                        integrate_regions(test_groups, regions_outline);
+////                        sprintf(mfisFileName, "%s", "Maps/Offline/integrated_regions_outlines.png");                   
+////                        plotObjectsColours(mfisFileName, test_groups);
+////                        sprintf(mfisFileName, "%s", "Maps/Offline/integrated_regions_map.png");                   
+////                        plotObjectsColours(mfisFileName, regions_map);
+////                
+////                
+////                }
+                
+                computedOutput.setChunkFlag(0);
+                chunk_cnt++;
+                function_switch_Flag = 2;
+                waitHere();
+        }
+        
+
+        //save lastStep information to update at next step(in case)
+        lastStepInfo.setMFIS(MFIS);
+        lastStepInfo.setView(currentView);
+        lastStepInfo.setTargetObjects(targetObjectsInCV);
+        lastStepInfo.setRobotPosition(currentRobotPositionInMFIS);
+        lastStepInfo.setReferenceObjects(referenceObjects);
+        lastStepInfo.setExits(exitsFromCV);
+        
+        //firstloop_Flag = 1;
+        ////expect_process_flag = 0;
+        //double cope current step MFIS for chunking process
+        //last_step_MFIS = MFIS;
+        
+    
+        if(v == w)
+        {
+            //compute returning route
+//            vector<Object> returning_route = Plan_return_path(MFIS, all_chunks[0], currentRobotPositionInMFIS, all_chunk_path[0]);
+//            sprintf(mfisFileName, "%s%d%s", "Maps/Offline/finalPercptualMap&returnRoute-", set, ".png");
+//            plotObjectsOf5Kinds(mfisFileName, myrobot.getRobot(), currentRobotPositionInMFIS, all_chunks[0], MFIS, returning_route);
+            sprintf(mfisFileName, "%s%d%s", "Maps/Offline/finalPercptualMap&returnRoute-", set, ".png");
+            plotObjectsOf4Kinds(mfisFileName, myrobot.getRobot(), currentRobotPositionInMFIS, all_chunks[0], all_chunks.back());
+        }
+        
+    } while (v < w); 
+
+    cout << "MFIS size " << MFIS.size() << " all robot position size " << allRobotPositions.size() << endl;
+
+    outFile.close();
+    outFileForRefError.close();
+    //localization 
+    currentRobotPositionInMFIS = myrobot.inMFIS(referenceObjects[0], referenceObjects[1], referenceObjects[0].getKP());
+
+    vector<Object> firstAndLastRP = myrobot.getRobot();
+    for (int i = 0; i < currentRobotPositionInMFIS.size(); i++)
+    {
+        firstAndLastRP.push_back(currentRobotPositionInMFIS[i]);
+    }
+
+    //sprintf(mfisFileName, "%s%d%s", "Maps/Offline/MFIS-refTH-", referenceNumberTH, ".png");
+    cout<<"size:----------------"<<allRobotPositions.size()<<endl;
+    //plotObjects(mfisFileName, robotPositionsAtLimitingPoints, MFIS);
+    sprintf(mfisFileName, "%s%d%s", "Maps/Offline/finalPercptualMap-", set, ".png");
+    //plotObjectsOf3Kinds(mfisFileName, firstAndLastRP, crossedExit, MFIS);
+    plotObjectsOf4Kinds(mfisFileName, myrobot.getRobot(), currentRobotPositionInMFIS, all_chunks[0], MFIS);
+
+    //cout << "Traveled Dist: " << traveledDistance << endl;
+    writeASCII(convertObjectToSurface(MFIS), "Maps/Offline/pm"); //for thesis
+    
+    //plotObjects("Maps/errorMap.png", errorMap, errorMap); //for thesis
+    perceptualMap.setMFIS(MFIS);
+
+
+    abstractRouteMap(MFIS, robotPositionsAtLimitingPoints, updatingPoints, currentRobotPositionInMFIS);
+    keyInfoOfCompuetedPM(mappingInfoFileName, ASRNumber, exitPoints, lostPoints, limitingPoints,
+            badLocalization, failedToRecognizeRef, referenceNumberTH, level, set);
+    //cout << levelName << level << " set " << set << endl;
+    //cout << "odo " << odoLocalizationUsed << endl;
+    cout << endl << " Visual Triangulation updating: " << vt_counter << " times. Path Integration updating: " << pi_counter << " times." << endl;
+    cout << endl << " Traveled distance: " << traveledDistance << endl;
+    
+
+}
+
+void TransforIntoGloabl(vector<Object> addView, Point coord, vector<Object> currentPos, double angle, int num)
+{
+           MyRobot robot(0, 0);
+           vector<Object> temp;
+           //combine a new local map into global map                           
+
+           double x1, y1, x2, y2;
+           angle = ((angle / 180) * PI);
+
+           for (int i = 0; i<int(addView.size()); i++)
+           {
+                      x1 = addView[i].X1() * cos(angle) - addView[i].Y1() * sin(angle) + coord.X();
+                      y1 = addView[i].X1() * sin(angle) + addView[i].Y1() * cos(angle) + coord.Y();
+
+                      x2 = addView[i].X2() * cos(angle) - addView[i].Y2() * sin(angle) + coord.X();
+                      y2 = addView[i].X2() * sin(angle) + addView[i].Y2() * cos(angle) + coord.Y();
+
+                      Object s(x1, y1, x2, y2, addView[i].getID(), addView[i].nearness(), addView[i].getP1OS(), addView[i].getP2OS(), addView[i].getGID());
+                      s.setKP(1);
+                      temp.push_back(s);
+           }
+
+           currentTransLM = temp;
+           Memories.push_back(currentTransLM); // storing all transformed local maps;
+
+           MapofLMs = addTwoVectorsOfObjects(MapofLMs, temp);
+
+}
+
+
+vector<Object> TransformforAllviews(vector<Object> addView, Point coord, vector<Object> currentPos, double angle, int num)
+{
+           MyRobot robot(0, 0);
+           vector<Object> temp;
+           //combine a new local map into global map                           
+
+           double x1, y1, x2, y2;
+           angle = ((angle / 180) * PI);
+
+           for (int i = 0; i<int(addView.size()); i++)
+           {
+                      x1 = addView[i].X1() * cos(angle) - addView[i].Y1() * sin(angle) + coord.X();
+                      y1 = addView[i].X1() * sin(angle) + addView[i].Y1() * cos(angle) + coord.Y();
+
+                      x2 = addView[i].X2() * cos(angle) - addView[i].Y2() * sin(angle) + coord.X();
+                      y2 = addView[i].X2() * sin(angle) + addView[i].Y2() * cos(angle) + coord.Y();
+
+                      Object s(x1, y1, x2, y2, addView[i].getID(), addView[i].nearness(), addView[i].getP1OS(), addView[i].getP2OS(), addView[i].getGID());
+                      s.setKP(1);
+                      s.setASRNo(addView[i].getASRNo());
+                      s.setChunkFLag(addView[i].getChunkFlag());
+                      s.setColorID(addView[i].getColorID());
+                      //s.setGID(addView[i].getGID());
+                      //s.setID(addView[i].getID());
+                      s.setKP(addView[i].getKP());
+                      s.setLimitingPoint(addView[i].getLimitingPoint());
+                      s.setLocalEnvID(addView[i].getLocalEnvID());
+                      //s.setLocalEnvID();
+                      //s.setNS();
+                      s.setOoPV(addView[i].getOoPV());
+                      s.setOrt(addView[i].getOrt());
+                      s.setP1OS(addView[i].getP1OS());
+                      s.setP2OS(addView[i].getP2OS());
+                      s.setPEP1(addView[i].getPEP1());
+                      s.setPEP2(addView[i].getPEP2());
+                      s.setPO(addView[i].getPO());
+                      s.setPos(addView[i].getPos());
+                      s.setVN(addView[i].getVN());
+                      
+                      
+                      temp.push_back(s);
+           }
+
+           //currentTransLM = temp;
+           //allLEs.push_back(temp);
+           return temp;
+}
+
+
+
+
+

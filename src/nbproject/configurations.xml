@@ -1,0 +1,427 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configurationDescriptor version="97">
+  <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
+    <df root="." name="0">
+      <in>AutoXploreAndMapping.cpp</in>
+      <in>ChunkInfor.cpp</in>
+      <in>ChunkInfor.h</in>
+      <in>ChunksOp.H</in>
+      <in>ChunksOp.cpp</in>
+      <in>CompareASR.cpp</in>
+      <in>CompareASRClass.cpp</in>
+      <in>Comparison.cpp</in>
+      <in>Concave.cpp</in>
+      <in>ConvexHull.cpp</in>
+      <in>ConvexHull.h</in>
+      <in>Ellipse.cpp</in>
+      <in>Ellipse.h</in>
+      <in>Exit.cpp</in>
+      <in>Exit.h</in>
+      <in>ExitIdentify.cpp</in>
+      <in>Expectation.cpp</in>
+      <in>Expectation.h</in>
+      <in>Exploration.cpp</in>
+      <in>Exploration.h</in>
+      <in>ExploringandReturn.cpp</in>
+      <in>FindGap.cpp</in>
+      <in>FunctionOfMFIS.cpp</in>
+      <in>FunctionOfMFIS.h</in>
+      <in>GXplorationAndMapping.cpp</in>
+      <in>GeometricOp.cpp</in>
+      <in>GeometryAndExit.cpp</in>
+      <in>GeometryAndExit.h</in>
+      <in>GeometryFuncs.cpp</in>
+      <in>GlobalAndRouteMap.cpp</in>
+      <in>GlobalMapModule.cpp</in>
+      <in>GlobalMapModule.h</in>
+      <in>GroupS.cpp</in>
+      <in>GxplorationAndEnduringmap.cpp</in>
+      <in>GxplorationAndExpectation.cpp</in>
+      <in>GxplorationAndExpectation_DeletionModify.cpp</in>
+      <in>HomeBasedViews.cpp</in>
+      <in>Laser2Surface.cpp</in>
+      <in>Map.cpp</in>
+      <in>Mapping.cpp</in>
+      <in>Memory.cpp</in>
+      <in>Minfo.cpp</in>
+      <in>MoveTest.cpp</in>
+      <in>Object.cpp</in>
+      <in>PathIntegrationModule.cpp</in>
+      <in>PathIntegrationModule.h</in>
+      <in>PathPlanning.cpp</in>
+      <in>PerceptualMapping.cpp</in>
+      <in>Plotting.cpp</in>
+      <in>Point.cpp</in>
+      <in>PointAndSurface.cpp</in>
+      <in>Polygon.cpp</in>
+      <in>PolygonChoice.cpp</in>
+      <in>ReturnHome.cpp</in>
+      <in>Returning.cpp</in>
+      <in>Returning.h</in>
+      <in>RobotPosition.cpp</in>
+      <in>RouteMapModule.cpp</in>
+      <in>RouteMapModule.h</in>
+      <in>SimplyHoming.cpp</in>
+      <in>StructBoundary.cpp</in>
+      <in>StructBoundary.h</in>
+      <in>TestCombineData.cpp</in>
+      <in>TestCombineData.h</in>
+      <in>Testboost.cpp</in>
+      <in>ToolFunctions.cpp</in>
+      <in>Transporter.cpp</in>
+      <in>WanderAndMapping.cpp</in>
+      <in>asr.cpp</in>
+      <in>asrOp.cpp</in>
+      <in>clipper.cpp</in>
+      <in>concave_hull.cpp</in>
+      <in>concave_hull.h</in>
+      <in>convertlog.cpp</in>
+      <in>convexPathPlanner.cpp</in>
+      <in>demo.cpp</in>
+      <in>display.cpp</in>
+      <in>errorMap.cpp</in>
+      <in>errorMapWholeFloor.cpp</in>
+      <in>localMapAndExpectation.cpp</in>
+      <in>localMapsAndChunk.cpp</in>
+      <in>localmapAndglobal.cpp</in>
+      <in>localmapGen.cpp</in>
+      <in>mapWholeFloor.cpp</in>
+      <in>mfisOp.cpp</in>
+      <in>offlineMapping.cpp</in>
+      <in>readAndwriteASCII.cpp</in>
+      <in>robotControl.cpp</in>
+      <in>space.cpp</in>
+      <in>thesis.cpp</in>
+      <in>wander.cpp</in>
+    </df>
+    <logicalFolder name="ExternalFiles"
+                   displayName="Important Files"
+                   projectFiles="false"
+                   kind="IMPORTANT_FILES_FOLDER">
+      <itemPath>Makefile</itemPath>
+      <itemPath>nbproject/private/launcher.properties</itemPath>
+    </logicalFolder>
+    <itemPath>nbproject/Matplot.cpp</itemPath>
+    <itemPath>nbproject/TrimAlgorithms.cpp</itemPath>
+    <itemPath>nbproject/VFH.cpp</itemPath>
+  </logicalFolder>
+  <sourceFolderFilter>^(nbproject)$</sourceFolderFilter>
+  <sourceRootList>
+    <Elem>.</Elem>
+  </sourceRootList>
+  <projectmakefile>Makefile</projectmakefile>
+  <confs>
+    <conf name="Default" type="0">
+      <toolsSet>
+        <compilerSet>default</compilerSet>
+        <dependencyChecking>false</dependencyChecking>
+        <rebuildPropChanged>false</rebuildPropChanged>
+      </toolsSet>
+      <flagsDictionary>
+        <element flagsID="0" commonFlags="-O1 -fPIC"/>
+      </flagsDictionary>
+      <codeAssistance>
+      </codeAssistance>
+      <makefileType>
+        <makeTool>
+          <buildCommandWorkingDir>.</buildCommandWorkingDir>
+          <buildCommand>${MAKE} -f Makefile</buildCommand>
+          <cleanCommand>${MAKE} -f Makefile clean</cleanCommand>
+          <executablePath>../bin/localMapsAndChunk</executablePath>
+          <ccTool>
+            <incDir>
+              <pElem>../../GuidedMapping</pElem>
+              <pElem>/usr/local/Aria/include</pElem>
+              <pElem>/usr/local/include</pElem>
+            </incDir>
+          </ccTool>
+        </makeTool>
+        <preBuild>
+          <preBuildCommandWorkingDir>.</preBuildCommandWorkingDir>
+          <preBuildCommand></preBuildCommand>
+        </preBuild>
+      </makefileType>
+      <item path="AutoXploreAndMapping.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="ChunkInfor.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="ChunkInfor.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="ChunksOp.H" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="ChunksOp.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="CompareASR.cpp" ex="false" tool="1" flavor2="4">
+        <ccTool flags="0">
+        </ccTool>
+      </item>
+      <item path="CompareASRClass.cpp" ex="false" tool="1" flavor2="4">
+        <ccTool flags="0">
+        </ccTool>
+      </item>
+      <item path="Comparison.cpp" ex="false" tool="1" flavor2="4">
+        <ccTool flags="0">
+        </ccTool>
+      </item>
+      <item path="Concave.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="ConvexHull.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="ConvexHull.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Ellipse.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Ellipse.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Exit.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Exit.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="ExitIdentify.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Expectation.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Expectation.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Exploration.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Exploration.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="ExploringandReturn.cpp" ex="false" tool="1" flavor2="4">
+        <ccTool flags="0">
+        </ccTool>
+      </item>
+      <item path="FindGap.cpp" ex="false" tool="1" flavor2="4">
+        <ccTool flags="0">
+        </ccTool>
+      </item>
+      <item path="FunctionOfMFIS.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="FunctionOfMFIS.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="GXplorationAndMapping.cpp" ex="false" tool="1" flavor2="4">
+        <ccTool flags="0">
+        </ccTool>
+      </item>
+      <item path="GeometricOp.cpp" ex="false" tool="1" flavor2="4">
+        <ccTool flags="0">
+        </ccTool>
+      </item>
+      <item path="GeometryAndExit.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="GeometryAndExit.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="GeometryFuncs.cpp" ex="false" tool="1" flavor2="4">
+        <ccTool flags="0">
+        </ccTool>
+      </item>
+      <item path="GlobalAndRouteMap.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="GlobalMapModule.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="GlobalMapModule.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="GroupS.cpp" ex="false" tool="1" flavor2="4">
+        <ccTool flags="0">
+        </ccTool>
+      </item>
+      <item path="GxplorationAndEnduringmap.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="GxplorationAndExpectation.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="GxplorationAndExpectation_DeletionModify.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="HomeBasedViews.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Laser2Surface.cpp" ex="false" tool="1" flavor2="4">
+        <ccTool flags="0">
+        </ccTool>
+      </item>
+      <item path="Map.cpp" ex="false" tool="1" flavor2="4">
+        <ccTool flags="0">
+        </ccTool>
+      </item>
+      <item path="Mapping.cpp" ex="false" tool="1" flavor2="4">
+        <ccTool flags="0">
+        </ccTool>
+      </item>
+      <item path="Memory.cpp" ex="false" tool="1" flavor2="0">
+        <ccTool flags="0">
+        </ccTool>
+      </item>
+      <item path="Minfo.cpp" ex="false" tool="1" flavor2="4">
+        <ccTool flags="0">
+        </ccTool>
+      </item>
+      <item path="MoveTest.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Object.cpp" ex="false" tool="1" flavor2="4">
+        <ccTool flags="0">
+        </ccTool>
+      </item>
+      <item path="PathIntegrationModule.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="PathIntegrationModule.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="PathPlanning.cpp" ex="false" tool="1" flavor2="4">
+        <ccTool flags="0">
+        </ccTool>
+      </item>
+      <item path="PerceptualMapping.cpp" ex="false" tool="1" flavor2="4">
+        <ccTool flags="0">
+        </ccTool>
+      </item>
+      <item path="Plotting.cpp" ex="false" tool="1" flavor2="4">
+        <ccTool flags="0">
+        </ccTool>
+      </item>
+      <item path="Point.cpp" ex="false" tool="1" flavor2="4">
+        <ccTool flags="0">
+        </ccTool>
+      </item>
+      <item path="PointAndSurface.cpp" ex="false" tool="1" flavor2="4">
+        <ccTool flags="0">
+        </ccTool>
+      </item>
+      <item path="Polygon.cpp" ex="false" tool="1" flavor2="4">
+        <ccTool flags="0">
+        </ccTool>
+      </item>
+      <item path="PolygonChoice.cpp" ex="false" tool="1" flavor2="4">
+        <ccTool flags="0">
+        </ccTool>
+      </item>
+      <item path="ReturnHome.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Returning.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Returning.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="RobotPosition.cpp" ex="false" tool="1" flavor2="4">
+        <ccTool flags="0">
+        </ccTool>
+      </item>
+      <item path="RouteMapModule.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="RouteMapModule.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="SimplyHoming.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="StructBoundary.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="StructBoundary.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="TestCombineData.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="TestCombineData.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Testboost.cpp" ex="false" tool="1" flavor2="4">
+        <ccTool flags="0">
+        </ccTool>
+      </item>
+      <item path="ToolFunctions.cpp" ex="false" tool="1" flavor2="0">
+        <ccTool flags="0">
+        </ccTool>
+      </item>
+      <item path="Transporter.cpp" ex="false" tool="1" flavor2="4">
+        <ccTool flags="0">
+        </ccTool>
+      </item>
+      <item path="WanderAndMapping.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="asr.cpp" ex="false" tool="1" flavor2="4">
+        <ccTool flags="0">
+        </ccTool>
+      </item>
+      <item path="asrOp.cpp" ex="false" tool="1" flavor2="4">
+        <ccTool flags="0">
+        </ccTool>
+      </item>
+      <item path="clipper.cpp" ex="false" tool="1" flavor2="4">
+        <ccTool flags="0">
+        </ccTool>
+      </item>
+      <item path="concave_hull.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="concave_hull.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="convertlog.cpp" ex="false" tool="1" flavor2="4">
+        <ccTool flags="0">
+        </ccTool>
+      </item>
+      <item path="convexPathPlanner.cpp" ex="false" tool="1" flavor2="4">
+        <ccTool flags="0">
+        </ccTool>
+      </item>
+      <item path="demo.cpp" ex="false" tool="1" flavor2="4">
+        <ccTool flags="0">
+        </ccTool>
+      </item>
+      <item path="display.cpp" ex="false" tool="1" flavor2="4">
+        <ccTool flags="0">
+        </ccTool>
+      </item>
+      <item path="errorMap.cpp" ex="false" tool="1" flavor2="4">
+        <ccTool flags="0">
+        </ccTool>
+      </item>
+      <item path="errorMapWholeFloor.cpp" ex="false" tool="1" flavor2="4">
+        <ccTool flags="0">
+        </ccTool>
+      </item>
+      <item path="localMapAndExpectation.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="localMapsAndChunk.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="localmapAndglobal.cpp" ex="false" tool="1" flavor2="4">
+        <ccTool flags="0">
+        </ccTool>
+      </item>
+      <item path="localmapGen.cpp" ex="false" tool="1" flavor2="4">
+        <ccTool flags="0">
+        </ccTool>
+      </item>
+      <item path="mapWholeFloor.cpp" ex="false" tool="1" flavor2="4">
+        <ccTool flags="0">
+        </ccTool>
+      </item>
+      <item path="mfisOp.cpp" ex="false" tool="1" flavor2="4">
+        <ccTool flags="0">
+        </ccTool>
+      </item>
+      <item path="nbproject/Matplot.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="nbproject/TrimAlgorithms.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="nbproject/VFH.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="offlineMapping.cpp" ex="false" tool="1" flavor2="4">
+        <ccTool flags="0">
+        </ccTool>
+      </item>
+      <item path="readAndwriteASCII.cpp" ex="false" tool="1" flavor2="4">
+        <ccTool flags="0">
+        </ccTool>
+      </item>
+      <item path="robotControl.cpp" ex="false" tool="1" flavor2="4">
+        <ccTool flags="0">
+        </ccTool>
+      </item>
+      <item path="space.cpp" ex="false" tool="1" flavor2="4">
+        <ccTool flags="0">
+        </ccTool>
+      </item>
+      <item path="thesis.cpp" ex="false" tool="1" flavor2="4">
+        <ccTool flags="0">
+        </ccTool>
+      </item>
+      <item path="wander.cpp" ex="false" tool="1" flavor2="4">
+        <ccTool flags="0">
+        </ccTool>
+      </item>
+    </conf>
+  </confs>
+</configurationDescriptor>

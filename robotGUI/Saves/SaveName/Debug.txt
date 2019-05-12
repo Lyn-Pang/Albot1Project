@@ -1,0 +1,53 @@
+[25/09/2015 12:24:12] JourneyGUI Line#116: saved
+[25/09/2015 12:24:12] JourneyGUI Line#117: save folder created at : C:\Users\zfg5753\Desktop\GitHub\R-D-Robot-Mapping\RobotGUI\robotGUI\Saves\SaveName
+[25/09/2015 12:24:48] FileHandler Line#302: Load complete, 9 items loaded
+[25/09/2015 12:24:48] robotGUI.PastJourney Line#158: Size of panel: 600, 300
+[25/09/2015 12:24:48] robotGUI.PastJourney Line#300: Size of panel: 200, 100
+[25/09/2015 12:25:43] FileHandler Line#302: Load complete, 9 items loaded
+[25/09/2015 12:25:43] robotGUI.AbstractGUI Line#202: processing abstract data
+[25/09/2015 12:25:43] robotGUI.AbstractGUI Line#202: processing abstract data
+[25/09/2015 12:25:43] robotGUI.AbstractGUI Line#202: processing abstract data
+[25/09/2015 12:25:43] robotGUI.AbstractGUI Line#202: processing abstract data
+[25/09/2015 12:25:43] robotGUI.AbstractGUI Line#202: processing abstract data
+[25/09/2015 12:25:43] robotGUI.AbstractGUI Line#202: processing abstract data
+[25/09/2015 12:25:43] robotGUI.AbstractGUI Line#202: processing abstract data
+[25/09/2015 12:25:43] robotGUI.AbstractGUI Line#202: processing abstract data
+[25/09/2015 12:25:43] robotGUI.AbstractGUI Line#202: processing abstract data
+[25/09/2015 12:25:43] robotGUI.AbstractGUI Line#224: Offset by 971, 1830
+[25/09/2015 12:25:43] robotGUI.AbstractGUI Line#233: Before Offset : java.awt.Point[x=637,y=-195]
+[25/09/2015 12:25:44] robotGUI.AbstractGUI Line#236: After Offset : java.awt.Point[x=1608,y=1635]
+[25/09/2015 12:25:44] robotGUI.AbstractGUI Line#233: Before Offset : java.awt.Point[x=-157,y=-672]
+[25/09/2015 12:25:44] robotGUI.AbstractGUI Line#236: After Offset : java.awt.Point[x=814,y=1158]
+[25/09/2015 12:25:44] robotGUI.AbstractGUI Line#233: Before Offset : java.awt.Point[x=-285,y=-10]
+[25/09/2015 12:25:44] robotGUI.AbstractGUI Line#236: After Offset : java.awt.Point[x=686,y=1820]
+[25/09/2015 12:25:44] robotGUI.AbstractGUI Line#233: Before Offset : java.awt.Point[x=-284,y=2]
+[25/09/2015 12:25:44] robotGUI.AbstractGUI Line#236: After Offset : java.awt.Point[x=687,y=1832]
+[25/09/2015 12:25:44] robotGUI.AbstractGUI Line#233: Before Offset : java.awt.Point[x=-474,y=192]
+[25/09/2015 12:25:44] robotGUI.AbstractGUI Line#236: After Offset : java.awt.Point[x=497,y=2022]
+[25/09/2015 12:25:44] robotGUI.AbstractGUI Line#233: Before Offset : java.awt.Point[x=-971,y=-360]
+[25/09/2015 12:25:44] robotGUI.AbstractGUI Line#236: After Offset : java.awt.Point[x=0,y=1470]
+[25/09/2015 12:25:44] robotGUI.AbstractGUI Line#233: Before Offset : java.awt.Point[x=-397,y=-953]
+[25/09/2015 12:25:44] robotGUI.AbstractGUI Line#236: After Offset : java.awt.Point[x=574,y=877]
+[25/09/2015 12:25:44] robotGUI.AbstractGUI Line#233: Before Offset : java.awt.Point[x=-164,y=-1261]
+[25/09/2015 12:25:44] robotGUI.AbstractGUI Line#236: After Offset : java.awt.Point[x=807,y=569]
+[25/09/2015 12:25:44] robotGUI.AbstractGUI Line#233: Before Offset : java.awt.Point[x=297,y=-1830]
+[25/09/2015 12:25:44] robotGUI.AbstractGUI Line#236: After Offset : java.awt.Point[x=1268,y=0]
+[25/09/2015 12:25:44] robotGUI.AbstractGUI Line#246: button0 at location previousjava.awt.Point[x=1608,y=1635]
+[25/09/2015 12:25:44] robotGUI.AbstractGUI Line#248: button0 at location nextjava.awt.Point[x=575,y=444]
+[25/09/2015 12:25:44] robotGUI.AbstractGUI Line#246: button1 at location previousjava.awt.Point[x=814,y=1158]
+[25/09/2015 12:25:44] robotGUI.AbstractGUI Line#248: button1 at location nextjava.awt.Point[x=303,y=314]
+[25/09/2015 12:25:44] robotGUI.AbstractGUI Line#246: button2 at location previousjava.awt.Point[x=686,y=1820]
+[25/09/2015 12:25:44] robotGUI.AbstractGUI Line#248: button2 at location nextjava.awt.Point[x=259,y=495]
+[25/09/2015 12:25:44] robotGUI.AbstractGUI Line#246: button3 at location previousjava.awt.Point[x=687,y=1832]
+[25/09/2015 12:25:44] robotGUI.AbstractGUI Line#248: button3 at location nextjava.awt.Point[x=259,y=498]
+[25/09/2015 12:25:44] robotGUI.AbstractGUI Line#246: button4 at location previousjava.awt.Point[x=497,y=2022]
+[25/09/2015 12:25:44] robotGUI.AbstractGUI Line#248: button4 at location nextjava.awt.Point[x=194,y=550]
+[25/09/2015 12:25:44] robotGUI.AbstractGUI Line#246: button5 at location previousjava.awt.Point[x=0,y=1470]
+[25/09/2015 12:25:44] robotGUI.AbstractGUI Line#248: button5 at location nextjava.awt.Point[x=25,y=399]
+[25/09/2015 12:25:44] robotGUI.AbstractGUI Line#246: button6 at location previousjava.awt.Point[x=574,y=877]
+[25/09/2015 12:25:44] robotGUI.AbstractGUI Line#248: button6 at location nextjava.awt.Point[x=221,y=238]
+[25/09/2015 12:25:44] robotGUI.AbstractGUI Line#246: button7 at location previousjava.awt.Point[x=807,y=569]
+[25/09/2015 12:25:44] robotGUI.AbstractGUI Line#248: button7 at location nextjava.awt.Point[x=301,y=154]
+[25/09/2015 12:25:44] robotGUI.AbstractGUI Line#246: button8 at location previousjava.awt.Point[x=1268,y=0]
+[25/09/2015 12:25:44] robotGUI.AbstractGUI Line#248: button8 at location nextjava.awt.Point[x=458,y=0]
+[25/09/2015 12:25:47] robotGUI.AbstractGUI$2 Line#150: Selected buttons in Abstract cleared

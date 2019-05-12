@@ -1,0 +1,642 @@
+g++-4.4 -c -O1 -Wall -fPIC -I/home/sarotti/GuidedMapping -I/usr/local/Aria/include -I/usr/local/include Object.cpp -MM -MT ../obj/Object.o -MF ../obj/Object.o.d
+g++-4.4 -c -O1 -Wall -fPIC -I/home/sarotti/GuidedMapping -I/usr/local/Aria/include -I/usr/local/include Object.cpp -o ../obj/Object.o
+In file included from Object.H:10,
+                 from Object.cpp:10:
+PointAndSurface.H: In constructor ‘Surface::Surface(const PointXY&, const PointXY&, bool)’:
+PointAndSurface.H:135: warning: ‘Surface::isAnObstacle’ will be initialized after
+PointAndSurface.H:128: warning:   ‘bool Surface::p1Occluding’
+PointAndSurface.H:163: warning:   when initialized here
+g++-4.4 -c -O1 -Wall -fPIC -I/home/sarotti/GuidedMapping -I/usr/local/Aria/include -I/usr/local/include Point.cpp -MM -MT ../obj/Point.o -MF ../obj/Point.o.d
+g++-4.4 -c -O1 -Wall -fPIC -I/home/sarotti/GuidedMapping -I/usr/local/Aria/include -I/usr/local/include Point.cpp -o ../obj/Point.o
+g++-4.4 -c -O1 -Wall -fPIC -I/home/sarotti/GuidedMapping -I/usr/local/Aria/include -I/usr/local/include asr.cpp -MM -MT ../obj/asr.o -MF ../obj/asr.o.d
+g++-4.4 -c -O1 -Wall -fPIC -I/home/sarotti/GuidedMapping -I/usr/local/Aria/include -I/usr/local/include asr.cpp -o ../obj/asr.o
+In file included from Object.H:10,
+                 from asr.cpp:4:
+PointAndSurface.H: In constructor ‘Surface::Surface(const PointXY&, const PointXY&, bool)’:
+PointAndSurface.H:135: warning: ‘Surface::isAnObstacle’ will be initialized after
+PointAndSurface.H:128: warning:   ‘bool Surface::p1Occluding’
+PointAndSurface.H:163: warning:   when initialized here
+g++-4.4 -c -O1 -Wall -fPIC -I/home/sarotti/GuidedMapping -I/usr/local/Aria/include -I/usr/local/include GeometricOp.cpp -MM -MT ../obj/GeometricOp.o -MF ../obj/GeometricOp.o.d
+g++-4.4 -c -O1 -Wall -fPIC -I/home/sarotti/GuidedMapping -I/usr/local/Aria/include -I/usr/local/include GeometricOp.cpp -o ../obj/GeometricOp.o
+GeometricOp.cpp:816: warning: multi-character character constant
+In file included from Object.H:10,
+                 from GeometricOp.H:8,
+                 from GeometricOp.cpp:5:
+PointAndSurface.H: In constructor ‘Surface::Surface(const PointXY&, const PointXY&, bool)’:
+PointAndSurface.H:135: warning: ‘Surface::isAnObstacle’ will be initialized after
+PointAndSurface.H:128: warning:   ‘bool Surface::p1Occluding’
+PointAndSurface.H:163: warning:   when initialized here
+In file included from Plotting.H:16,
+                 from GeometricOp.cpp:11:
+PathPlanning.H: In constructor ‘Destination::Destination()’:
+PathPlanning.H:74: warning: ‘Destination::attemptsToAvoidObstacles’ will be initialized after
+PathPlanning.H:71: warning:   ‘double Destination::angle’
+PathPlanning.H:79: warning:   when initialized here
+GeometricOp.cpp: In function ‘std::vector<Object, std::allocator<Object> > xformObjectsbyXY(std::vector<Object, std::allocator<Object> >, double, double)’:
+GeometricOp.cpp:942: warning: comparison between signed and unsigned integer expressions
+g++-4.4 -c -O1 -Wall -fPIC -I/home/sarotti/GuidedMapping -I/usr/local/Aria/include -I/usr/local/include asrOp.cpp -MM -MT ../obj/asrOp.o -MF ../obj/asrOp.o.d
+g++-4.4 -c -O1 -Wall -fPIC -I/home/sarotti/GuidedMapping -I/usr/local/Aria/include -I/usr/local/include asrOp.cpp -o ../obj/asrOp.o
+In file included from Object.H:10,
+                 from mfisOp.H:7,
+                 from asrOp.cpp:1:
+PointAndSurface.H: In constructor ‘Surface::Surface(const PointXY&, const PointXY&, bool)’:
+PointAndSurface.H:135: warning: ‘Surface::isAnObstacle’ will be initialized after
+PointAndSurface.H:128: warning:   ‘bool Surface::p1Occluding’
+PointAndSurface.H:163: warning:   when initialized here
+In file included from Plotting.H:16,
+                 from asrOp.cpp:11:
+PathPlanning.H: In constructor ‘Destination::Destination()’:
+PathPlanning.H:74: warning: ‘Destination::attemptsToAvoidObstacles’ will be initialized after
+PathPlanning.H:71: warning:   ‘double Destination::angle’
+PathPlanning.H:79: warning:   when initialized here
+asrOp.cpp: In function ‘ASRNetwork splitCurrentASR(ASRNetwork, std::vector<Object, std::allocator<Object> >)’:
+asrOp.cpp:1408: warning: comparison between signed and unsigned integer expressions
+asrOp.cpp: In function ‘void abstractASRs(std::vector<ASR, std::allocator<ASR> >, std::vector<Object, std::allocator<Object> >, std::vector<std::vector<Object, std::allocator<Object> >, std::allocator<std::vector<Object, std::allocator<Object> > > >, std::vector<Object, std::allocator<Object> >)’:
+asrOp.cpp:2215: warning: comparison between signed and unsigned integer expressions
+asrOp.cpp:2216: warning: comparison between signed and unsigned integer expressions
+asrOp.cpp: In function ‘void boundaryOfThePlace(std::vector<ASR, std::allocator<ASR> >, std::vector<Object, std::allocator<Object> >, std::vector<std::vector<Object, std::allocator<Object> >, std::allocator<std::vector<Object, std::allocator<Object> > > >, std::vector<Object, std::allocator<Object> >, std::vector<Object, std::allocator<Object> >)’:
+asrOp.cpp:2454: warning: comparison between signed and unsigned integer expressions
+asrOp.cpp:2455: warning: comparison between signed and unsigned integer expressions
+g++-4.4 -c -O1 -Wall -fPIC -I/home/sarotti/GuidedMapping -I/usr/local/Aria/include -I/usr/local/include PerceptualMapping.cpp -MM -MT ../obj/PerceptualMapping.o -MF ../obj/PerceptualMapping.o.d
+g++-4.4 -c -O1 -Wall -fPIC -I/home/sarotti/GuidedMapping -I/usr/local/Aria/include -I/usr/local/include PerceptualMapping.cpp -o ../obj/PerceptualMapping.o
+In file included from Object.H:10,
+                 from Transporter.H:16,
+                 from PerceptualMapping.H:13,
+                 from PerceptualMapping.cpp:5:
+PointAndSurface.H: In constructor ‘Surface::Surface(const PointXY&, const PointXY&, bool)’:
+PointAndSurface.H:135: warning: ‘Surface::isAnObstacle’ will be initialized after
+PointAndSurface.H:128: warning:   ‘bool Surface::p1Occluding’
+PointAndSurface.H:163: warning:   when initialized here
+In file included from Transporter.H:18,
+                 from PerceptualMapping.H:13,
+                 from PerceptualMapping.cpp:5:
+PathPlanning.H: In constructor ‘Destination::Destination()’:
+PathPlanning.H:74: warning: ‘Destination::attemptsToAvoidObstacles’ will be initialized after
+PathPlanning.H:71: warning:   ‘double Destination::angle’
+PathPlanning.H:79: warning:   when initialized here
+PerceptualMapping.cpp: In function ‘Transporter updatePerceptualMap(std::vector<Object, std::allocator<Object> >, std::vector<Object, std::allocator<Object> >, std::vector<Object, std::allocator<Object> >, std::vector<Object, std::allocator<Object> >, int, int)’:
+PerceptualMapping.cpp:226: warning: comparison between signed and unsigned integer expressions
+PerceptualMapping.cpp:235: warning: comparison between signed and unsigned integer expressions
+PerceptualMapping.cpp: In function ‘Transporter updatePerceptualMapATPlace(std::vector<ASR, std::allocator<ASR> >, std::vector<Object, std::allocator<Object> >, std::vector<Object, std::allocator<Object> >, std::vector<Object, std::allocator<Object> >, std::vector<Object, std::allocator<Object> >, std::vector<Object, std::allocator<Object> >, int, int, bool, std::vector<Object, std::allocator<Object> >, std::vector<Object, std::allocator<Object> >)’:
+PerceptualMapping.cpp:305: warning: comparison between signed and unsigned integer expressions
+PerceptualMapping.cpp:714: warning: comparison between signed and unsigned integer expressions
+PerceptualMapping.cpp:729: warning: comparison between signed and unsigned integer expressions
+g++-4.4 -c -O1 -Wall -fPIC -I/home/sarotti/GuidedMapping -I/usr/local/Aria/include -I/usr/local/include mfisOp.cpp -MM -MT ../obj/mfisOp.o -MF ../obj/mfisOp.o.d
+g++-4.4 -c -O1 -Wall -fPIC -I/home/sarotti/GuidedMapping -I/usr/local/Aria/include -I/usr/local/include mfisOp.cpp -o ../obj/mfisOp.o
+In file included from Object.H:10,
+                 from mfisOp.H:7,
+                 from mfisOp.cpp:1:
+PointAndSurface.H: In constructor ‘Surface::Surface(const PointXY&, const PointXY&, bool)’:
+PointAndSurface.H:135: warning: ‘Surface::isAnObstacle’ will be initialized after
+PointAndSurface.H:128: warning:   ‘bool Surface::p1Occluding’
+PointAndSurface.H:163: warning:   when initialized here
+In file included from Plotting.H:16,
+                 from mfisOp.cpp:9:
+PathPlanning.H: In constructor ‘Destination::Destination()’:
+PathPlanning.H:74: warning: ‘Destination::attemptsToAvoidObstacles’ will be initialized after
+PathPlanning.H:71: warning:   ‘double Destination::angle’
+PathPlanning.H:79: warning:   when initialized here
+g++-4.4 -c -O1 -Wall -fPIC -I/home/sarotti/GuidedMapping -I/usr/local/Aria/include -I/usr/local/include Mapping.cpp -MM -MT ../obj/Mapping.o -MF ../obj/Mapping.o.d
+g++-4.4 -c -O1 -Wall -fPIC -I/home/sarotti/GuidedMapping -I/usr/local/Aria/include -I/usr/local/include Mapping.cpp -o ../obj/Mapping.o
+In file included from Object.H:10,
+                 from Mapping.cpp:15:
+PointAndSurface.H: In constructor ‘Surface::Surface(const PointXY&, const PointXY&, bool)’:
+PointAndSurface.H:135: warning: ‘Surface::isAnObstacle’ will be initialized after
+PointAndSurface.H:128: warning:   ‘bool Surface::p1Occluding’
+PointAndSurface.H:163: warning:   when initialized here
+In file included from Plotting.H:16,
+                 from Mapping.cpp:17:
+PathPlanning.H: In constructor ‘Destination::Destination()’:
+PathPlanning.H:74: warning: ‘Destination::attemptsToAvoidObstacles’ will be initialized after
+PathPlanning.H:71: warning:   ‘double Destination::angle’
+PathPlanning.H:79: warning:   when initialized here
+Mapping.cpp: In function ‘Transporter recognizeTargetObjects(std::vector<Object, std::allocator<Object> >, std::vector<Object, std::allocator<Object> >, std::vector<Object, std::allocator<Object> >, std::vector<double, std::allocator<double> >, int)’:
+Mapping.cpp:391: warning: unused variable ‘angleDistortion’
+Mapping.cpp:391: warning: unused variable ‘distDistortion’
+Mapping.cpp:392: warning: unused variable ‘totalAngleDistortion’
+Mapping.cpp:392: warning: unused variable ‘totalDistDistortion’
+Mapping.cpp:392: warning: unused variable ‘totalDistortion’
+Mapping.cpp:393: warning: unused variable ‘goodness’
+Mapping.cpp:394: warning: unused variable ‘distFromRobot’
+Mapping.cpp: In function ‘std::vector<Minfo, std::allocator<Minfo> > recognizeObjectsFrom2ConsViews(std::vector<Object, std::allocator<Object> >, std::vector<Object, std::allocator<Object> >)’:
+Mapping.cpp:812: warning: unused variable ‘p1d’
+Mapping.cpp:812: warning: unused variable ‘p2d’
+Mapping.cpp: In function ‘std::vector<Object, std::allocator<Object> > testingFunction()’:
+Mapping.cpp:989: warning: no return statement in function returning non-void
+Mapping.cpp: In function ‘Transporter recognizeThisPlace(ASRNetwork, std::vector<Object, std::allocator<Object> >, std::vector<Object, std::allocator<Object> >, std::vector<Object, std::allocator<Object> >, std::vector<Object, std::allocator<Object> >, int)’:
+Mapping.cpp:1065: warning: comparison between signed and unsigned integer expressions
+Mapping.cpp: In function ‘void useTopoMap(ASRNetwork, std::vector<Object, std::allocator<Object> >, std::vector<Object, std::allocator<Object> >, std::vector<Object, std::allocator<Object> >)’:
+Mapping.cpp:1508: warning: unused variable ‘distanceP1’
+Mapping.cpp:1508: warning: unused variable ‘distanceP2’
+g++-4.4 -c -O1 -Wall -fPIC -I/home/sarotti/GuidedMapping -I/usr/local/Aria/include -I/usr/local/include readAndwriteASCII.cpp -MM -MT ../obj/readAndwriteASCII.o -MF ../obj/readAndwriteASCII.o.d
+g++-4.4 -c -O1 -Wall -fPIC -I/home/sarotti/GuidedMapping -I/usr/local/Aria/include -I/usr/local/include readAndwriteASCII.cpp -o ../obj/readAndwriteASCII.o
+In file included from Object.H:10,
+                 from readAndwriteASCII.cpp:7:
+PointAndSurface.H: In constructor ‘Surface::Surface(const PointXY&, const PointXY&, bool)’:
+PointAndSurface.H:135: warning: ‘Surface::isAnObstacle’ will be initialized after
+PointAndSurface.H:128: warning:   ‘bool Surface::p1Occluding’
+PointAndSurface.H:163: warning:   when initialized here
+g++-4.4 -c -O1 -Wall -fPIC -I/home/sarotti/GuidedMapping -I/usr/local/Aria/include -I/usr/local/include Minfo.cpp -MM -MT ../obj/Minfo.o -MF ../obj/Minfo.o.d
+g++-4.4 -c -O1 -Wall -fPIC -I/home/sarotti/GuidedMapping -I/usr/local/Aria/include -I/usr/local/include Minfo.cpp -o ../obj/Minfo.o
+g++-4.4 -c -O1 -Wall -fPIC -I/home/sarotti/GuidedMapping -I/usr/local/Aria/include -I/usr/local/include PointAndSurface.cpp -MM -MT ../obj/PointAndSurface.o -MF ../obj/PointAndSurface.o.d
+g++-4.4 -c -O1 -Wall -fPIC -I/home/sarotti/GuidedMapping -I/usr/local/Aria/include -I/usr/local/include PointAndSurface.cpp -o ../obj/PointAndSurface.o
+In file included from PointAndSurface.cpp:1:
+PointAndSurface.H: In constructor ‘Surface::Surface(const PointXY&, const PointXY&, bool)’:
+PointAndSurface.H:135: warning: ‘Surface::isAnObstacle’ will be initialized after
+PointAndSurface.H:128: warning:   ‘bool Surface::p1Occluding’
+PointAndSurface.H:163: warning:   when initialized here
+g++-4.4 -c -O1 -Wall -fPIC -I/home/sarotti/GuidedMapping -I/usr/local/Aria/include -I/usr/local/include GeometryFuncs.cpp -MM -MT ../obj/GeometryFuncs.o -MF ../obj/GeometryFuncs.o.d
+g++-4.4 -c -O1 -Wall -fPIC -I/home/sarotti/GuidedMapping -I/usr/local/Aria/include -I/usr/local/include GeometryFuncs.cpp -o ../obj/GeometryFuncs.o
+In file included from GeometryFuncs.H:13,
+                 from GeometryFuncs.cpp:7:
+PointAndSurface.H: In constructor ‘Surface::Surface(const PointXY&, const PointXY&, bool)’:
+PointAndSurface.H:135: warning: ‘Surface::isAnObstacle’ will be initialized after
+PointAndSurface.H:128: warning:   ‘bool Surface::p1Occluding’
+PointAndSurface.H:163: warning:   when initialized here
+g++-4.4 -c -O1 -Wall -fPIC -I/home/sarotti/GuidedMapping -I/usr/local/Aria/include -I/usr/local/include GroupS.cpp -MM -MT ../obj/GroupS.o -MF ../obj/GroupS.o.d
+g++-4.4 -c -O1 -Wall -fPIC -I/home/sarotti/GuidedMapping -I/usr/local/Aria/include -I/usr/local/include GroupS.cpp -o ../obj/GroupS.o
+In file included from Object.H:10,
+                 from GroupS.cpp:6:
+PointAndSurface.H: In constructor ‘Surface::Surface(const PointXY&, const PointXY&, bool)’:
+PointAndSurface.H:135: warning: ‘Surface::isAnObstacle’ will be initialized after
+PointAndSurface.H:128: warning:   ‘bool Surface::p1Occluding’
+PointAndSurface.H:163: warning:   when initialized here
+In file included from Plotting.H:16,
+                 from GroupS.cpp:9:
+PathPlanning.H: In constructor ‘Destination::Destination()’:
+PathPlanning.H:74: warning: ‘Destination::attemptsToAvoidObstacles’ will be initialized after
+PathPlanning.H:71: warning:   ‘double Destination::angle’
+PathPlanning.H:79: warning:   when initialized here
+GroupS.cpp: In function ‘std::vector<Object, std::allocator<Object> > updateUsingAveragePoint(std::vector<Object, std::allocator<Object> >, std::vector<Object, std::allocator<Object> >)’:
+GroupS.cpp:542: warning: comparison between signed and unsigned integer expressions
+GroupS.cpp:545: warning: comparison between signed and unsigned integer expressions
+g++-4.4 -c -O1 -Wall -fPIC -I/home/sarotti/GuidedMapping -I/usr/local/Aria/include -I/usr/local/include Transporter.cpp -MM -MT ../obj/Transporter.o -MF ../obj/Transporter.o.d
+g++-4.4 -c -O1 -Wall -fPIC -I/home/sarotti/GuidedMapping -I/usr/local/Aria/include -I/usr/local/include Transporter.cpp -o ../obj/Transporter.o
+In file included from Object.H:10,
+                 from Transporter.cpp:4:
+PointAndSurface.H: In constructor ‘Surface::Surface(const PointXY&, const PointXY&, bool)’:
+PointAndSurface.H:135: warning: ‘Surface::isAnObstacle’ will be initialized after
+PointAndSurface.H:128: warning:   ‘bool Surface::p1Occluding’
+PointAndSurface.H:163: warning:   when initialized here
+In file included from Transporter.H:18,
+                 from Transporter.cpp:6:
+PathPlanning.H: In constructor ‘Destination::Destination()’:
+PathPlanning.H:74: warning: ‘Destination::attemptsToAvoidObstacles’ will be initialized after
+PathPlanning.H:71: warning:   ‘double Destination::angle’
+PathPlanning.H:79: warning:   when initialized here
+g++-4.4 -c -O1 -Wall -fPIC -I/home/sarotti/GuidedMapping -I/usr/local/Aria/include -I/usr/local/include Plotting.cpp -MM -MT ../obj/Plotting.o -MF ../obj/Plotting.o.d
+g++-4.4 -c -O1 -Wall -fPIC -I/home/sarotti/GuidedMapping -I/usr/local/Aria/include -I/usr/local/include Plotting.cpp -o ../obj/Plotting.o
+In file included from Object.H:10,
+                 from readAndwriteASCII.H:6,
+                 from Plotting.cpp:16:
+PointAndSurface.H: In constructor ‘Surface::Surface(const PointXY&, const PointXY&, bool)’:
+PointAndSurface.H:135: warning: ‘Surface::isAnObstacle’ will be initialized after
+PointAndSurface.H:128: warning:   ‘bool Surface::p1Occluding’
+PointAndSurface.H:163: warning:   when initialized here
+In file included from Plotting.H:16,
+                 from Plotting.cpp:25:
+PathPlanning.H: In constructor ‘Destination::Destination()’:
+PathPlanning.H:74: warning: ‘Destination::attemptsToAvoidObstacles’ will be initialized after
+PathPlanning.H:71: warning:   ‘double Destination::angle’
+PathPlanning.H:79: warning:   when initialized here
+Plotting.cpp: In function ‘void plotAllASR(std::vector<ASR, std::allocator<ASR> >, std::vector<Object, std::allocator<Object> >)’:
+Plotting.cpp:1508: warning: comparison between signed and unsigned integer expressions
+Plotting.cpp:1474: warning: unused variable ‘asrname’
+Plotting.cpp: In function ‘void plotPerceptualMap(const char*, std::vector<Object, std::allocator<Object> >, std::vector<Object, std::allocator<Object> >, int)’:
+Plotting.cpp:1664: warning: comparison between signed and unsigned integer expressions
+Plotting.cpp:1673: warning: comparison between signed and unsigned integer expressions
+Plotting.cpp:1675: warning: comparison between signed and unsigned integer expressions
+Plotting.cpp: In function ‘void plotObjects(const char*, std::vector<Object, std::allocator<Object> >, std::vector<Object, std::allocator<Object> >, std::vector<int, std::allocator<int> >)’:
+Plotting.cpp:1758: warning: ‘lastI’ may be used uninitialized in this function
+g++-4.4 -c -O1 -Wall -fPIC -I/home/sarotti/GuidedMapping -I/usr/local/Aria/include -I/usr/local/include PathPlanning.cpp -MM -MT ../obj/PathPlanning.o -MF ../obj/PathPlanning.o.d
+g++-4.4 -c -O1 -Wall -fPIC -I/home/sarotti/GuidedMapping -I/usr/local/Aria/include -I/usr/local/include PathPlanning.cpp -o ../obj/PathPlanning.o
+PathPlanning.cpp:2337: warning: character constant too long for its type
+In file included from Object.H:10,
+                 from PathPlanning.H:8,
+                 from PathPlanning.cpp:5:
+PointAndSurface.H: In constructor ‘Surface::Surface(const PointXY&, const PointXY&, bool)’:
+PointAndSurface.H:135: warning: ‘Surface::isAnObstacle’ will be initialized after
+PointAndSurface.H:128: warning:   ‘bool Surface::p1Occluding’
+PointAndSurface.H:163: warning:   when initialized here
+In file included from PathPlanning.cpp:5:
+PathPlanning.H: In constructor ‘Destination::Destination()’:
+PathPlanning.H:74: warning: ‘Destination::attemptsToAvoidObstacles’ will be initialized after
+PathPlanning.H:71: warning:   ‘double Destination::angle’
+PathPlanning.H:79: warning:   when initialized here
+PathPlanning.cpp: In function ‘std::vector<double, std::allocator<double> > exitsFromorign(std::vector<Exit, std::allocator<Exit> >)’:
+PathPlanning.cpp:104: warning: comparison between signed and unsigned integer expressions
+PathPlanning.cpp: In function ‘std::vector<Object, std::allocator<Object> > findDestinationExits(std::vector<Object, std::allocator<Object> >, std::vector<Object, std::allocator<Object> >)’:
+PathPlanning.cpp:1038: warning: comparison between signed and unsigned integer expressions
+PathPlanning.cpp: In function ‘std::vector<Object, std::allocator<Object> > findAllDestinationExits(std::vector<Object, std::allocator<Object> >, std::vector<Object, std::allocator<Object> >)’:
+PathPlanning.cpp:1091: warning: comparison between signed and unsigned integer expressions
+PathPlanning.cpp: In function ‘std::vector<Exit, std::allocator<Exit> > findNewASRFormingExits(std::vector<Object, std::allocator<Object> >)’:
+PathPlanning.cpp:1142: warning: unused variable ‘distp2top1’
+PathPlanning.cpp: In function ‘std::vector<Object, std::allocator<Object> > findExitToReachGoal(std::vector<Object, std::allocator<Object> >, std::pair<double, double>, std::vector<Object, std::allocator<Object> >, int)’:
+PathPlanning.cpp:2045: warning: unused variable ‘exitToGoalDistance’
+PathPlanning.cpp: In function ‘std::vector<Exit, std::allocator<Exit> > findGapasExits(std::vector<Object, std::allocator<Object> >)’:
+PathPlanning.cpp:2482: warning: comparison between signed and unsigned integer expressions
+PathPlanning.cpp:2484: warning: comparison between signed and unsigned integer expressions
+PathPlanning.cpp: In function ‘std::vector<Point, std::allocator<Point> > findPathToReachGoal(std::vector<ASR, std::allocator<ASR> >)’:
+PathPlanning.cpp:2361: warning: ‘forBug’ may be used uninitialized in this function
+g++-4.4 -c -O1 -Wall -fPIC -I/home/sarotti/GuidedMapping -I/usr/local/Aria/include -I/usr/local/include Map.cpp -MM -MT ../obj/Map.o -MF ../obj/Map.o.d
+g++-4.4 -c -O1 -Wall -fPIC -I/home/sarotti/GuidedMapping -I/usr/local/Aria/include -I/usr/local/include Map.cpp -o ../obj/Map.o
+In file included from Object.H:10,
+                 from Map.cpp:3:
+PointAndSurface.H: In constructor ‘Surface::Surface(const PointXY&, const PointXY&, bool)’:
+PointAndSurface.H:135: warning: ‘Surface::isAnObstacle’ will be initialized after
+PointAndSurface.H:128: warning:   ‘bool Surface::p1Occluding’
+PointAndSurface.H:163: warning:   when initialized here
+g++-4.4 -c -O1 -Wall -fPIC -I/home/sarotti/GuidedMapping -I/usr/local/Aria/include -I/usr/local/include CompareASR.cpp -MM -MT ../obj/CompareASR.o -MF ../obj/CompareASR.o.d
+g++-4.4 -c -O1 -Wall -fPIC -I/home/sarotti/GuidedMapping -I/usr/local/Aria/include -I/usr/local/include CompareASR.cpp -o ../obj/CompareASR.o
+In file included from Object.H:10,
+                 from asr.H:9,
+                 from CompareASR.cpp:5:
+PointAndSurface.H: In constructor ‘Surface::Surface(const PointXY&, const PointXY&, bool)’:
+PointAndSurface.H:135: warning: ‘Surface::isAnObstacle’ will be initialized after
+PointAndSurface.H:128: warning:   ‘bool Surface::p1Occluding’
+PointAndSurface.H:163: warning:   when initialized here
+In file included from Transporter.H:18,
+                 from CompareASR.H:16,
+                 from CompareASR.cpp:8:
+PathPlanning.H: In constructor ‘Destination::Destination()’:
+PathPlanning.H:74: warning: ‘Destination::attemptsToAvoidObstacles’ will be initialized after
+PathPlanning.H:71: warning:   ‘double Destination::angle’
+PathPlanning.H:79: warning:   when initialized here
+CompareASR.cpp: In function ‘std::vector<Object, std::allocator<Object> > findSameObjectsFromTwoViews(std::vector<Object, std::allocator<Object> >, std::vector<Object, std::allocator<Object> >, double, double)’:
+CompareASR.cpp:196: warning: unused variable ‘errorDist’
+CompareASR.cpp:196: warning: unused variable ‘errorAngle’
+CompareASR.cpp: In function ‘ASR mergeOldandNewASRs(ASR, ASR)’:
+CompareASR.cpp:640: warning: unused variable ‘deleteThisFromNewASR’
+g++-4.4 -c -O1 -Wall -fPIC -I/home/sarotti/GuidedMapping -I/usr/local/Aria/include -I/usr/local/include CompareASRClass.cpp -MM -MT ../obj/CompareASRClass.o -MF ../obj/CompareASRClass.o.d
+g++-4.4 -c -O1 -Wall -fPIC -I/home/sarotti/GuidedMapping -I/usr/local/Aria/include -I/usr/local/include CompareASRClass.cpp -o ../obj/CompareASRClass.o
+In file included from Object.H:10,
+                 from CompareASRClass.cpp:5:
+PointAndSurface.H: In constructor ‘Surface::Surface(const PointXY&, const PointXY&, bool)’:
+PointAndSurface.H:135: warning: ‘Surface::isAnObstacle’ will be initialized after
+PointAndSurface.H:128: warning:   ‘bool Surface::p1Occluding’
+PointAndSurface.H:163: warning:   when initialized here
+g++-4.4 -c -O1 -Wall -fPIC -I/home/sarotti/GuidedMapping -I/usr/local/Aria/include -I/usr/local/include Laser2Surface.cpp -MM -MT ../obj/Laser2Surface.o -MF ../obj/Laser2Surface.o.d
+g++-4.4 -c -O1 -Wall -fPIC -I/home/sarotti/GuidedMapping -I/usr/local/Aria/include -I/usr/local/include Laser2Surface.cpp -o ../obj/Laser2Surface.o
+In file included from Laser2Surface.H:12,
+                 from Laser2Surface.cpp:11:
+PointAndSurface.H: In constructor ‘Surface::Surface(const PointXY&, const PointXY&, bool)’:
+PointAndSurface.H:135: warning: ‘Surface::isAnObstacle’ will be initialized after
+PointAndSurface.H:128: warning:   ‘bool Surface::p1Occluding’
+PointAndSurface.H:163: warning:   when initialized here
+g++-4.4 -c -O1 -Wall -fPIC -I/home/sarotti/GuidedMapping -I/usr/local/Aria/include -I/usr/local/include Polygon.cpp -MM -MT ../obj/Polygon.o -MF ../obj/Polygon.o.d
+g++-4.4 -c -O1 -Wall -fPIC -I/home/sarotti/GuidedMapping -I/usr/local/Aria/include -I/usr/local/include Polygon.cpp -o ../obj/Polygon.o
+In file included from polygons.h:12,
+                 from Polygon.cpp:8:
+PointAndSurface.H: In constructor ‘Surface::Surface(const PointXY&, const PointXY&, bool)’:
+PointAndSurface.H:135: warning: ‘Surface::isAnObstacle’ will be initialized after
+PointAndSurface.H:128: warning:   ‘bool Surface::p1Occluding’
+PointAndSurface.H:163: warning:   when initialized here
+Polygon.cpp: In member function ‘MPolygon MPolygon::MergePolygons(const MPolygon&)’:
+Polygon.cpp:97: warning: ‘i_pos’ may be used uninitialized in this function
+Polygon.cpp:97: warning: ‘j_pos’ may be used uninitialized in this function
+g++-4.4 -c -O1 -Wall -fPIC -I/home/sarotti/GuidedMapping -I/usr/local/Aria/include -I/usr/local/include PolygonChoice.cpp -MM -MT ../obj/PolygonChoice.o -MF ../obj/PolygonChoice.o.d
+g++-4.4 -c -O1 -Wall -fPIC -I/home/sarotti/GuidedMapping -I/usr/local/Aria/include -I/usr/local/include PolygonChoice.cpp -o ../obj/PolygonChoice.o
+In file included from space.h:13,
+                 from PolygonChoice.cpp:1:
+PointAndSurface.H: In constructor ‘Surface::Surface(const PointXY&, const PointXY&, bool)’:
+PointAndSurface.H:135: warning: ‘Surface::isAnObstacle’ will be initialized after
+PointAndSurface.H:128: warning:   ‘bool Surface::p1Occluding’
+PointAndSurface.H:163: warning:   when initialized here
+PolygonChoice.cpp: In member function ‘std::vector<PointXY, std::allocator<PointXY> > PathComputationModule::checkPointsOptimisation(std::vector<PointXY, std::allocator<PointXY> >)’:
+PolygonChoice.cpp:132: warning: comparison between signed and unsigned integer expressions
+PolygonChoice.cpp:146: warning: comparison between signed and unsigned integer expressions
+g++-4.4 -c -O1 -Wall -fPIC -I/home/sarotti/GuidedMapping -I/usr/local/Aria/include -I/usr/local/include space.cpp -MM -MT ../obj/space.o -MF ../obj/space.o.d
+g++-4.4 -c -O1 -Wall -fPIC -I/home/sarotti/GuidedMapping -I/usr/local/Aria/include -I/usr/local/include space.cpp -o ../obj/space.o
+In file included from space.h:13,
+                 from space.cpp:1:
+PointAndSurface.H: In constructor ‘Surface::Surface(const PointXY&, const PointXY&, bool)’:
+PointAndSurface.H:135: warning: ‘Surface::isAnObstacle’ will be initialized after
+PointAndSurface.H:128: warning:   ‘bool Surface::p1Occluding’
+PointAndSurface.H:163: warning:   when initialized here
+g++-4.4 -c -O1 -Wall -fPIC -I/home/sarotti/GuidedMapping -I/usr/local/Aria/include -I/usr/local/include display.cpp -MM -MT ../obj/display.o -MF ../obj/display.o.d
+g++-4.4 -c -O1 -Wall -fPIC -I/home/sarotti/GuidedMapping -I/usr/local/Aria/include -I/usr/local/include display.cpp -o ../obj/display.o
+In file included from space.h:13,
+                 from display.cpp:6:
+PointAndSurface.H: In constructor ‘Surface::Surface(const PointXY&, const PointXY&, bool)’:
+PointAndSurface.H:135: warning: ‘Surface::isAnObstacle’ will be initialized after
+PointAndSurface.H:128: warning:   ‘bool Surface::p1Occluding’
+PointAndSurface.H:163: warning:   when initialized here
+g++-4.4 -c -O1 -Wall -fPIC -I/home/sarotti/GuidedMapping -I/usr/local/Aria/include -I/usr/local/include convexPathPlanner.cpp -MM -MT ../obj/convexPathPlanner.o -MF ../obj/convexPathPlanner.o.d
+g++-4.4 -c -O1 -Wall -fPIC -I/home/sarotti/GuidedMapping -I/usr/local/Aria/include -I/usr/local/include convexPathPlanner.cpp -o ../obj/convexPathPlanner.o
+In file included from space.h:13,
+                 from convexPathPlanner.cpp:5:
+PointAndSurface.H: In constructor ‘Surface::Surface(const PointXY&, const PointXY&, bool)’:
+PointAndSurface.H:135: warning: ‘Surface::isAnObstacle’ will be initialized after
+PointAndSurface.H:128: warning:   ‘bool Surface::p1Occluding’
+PointAndSurface.H:163: warning:   when initialized here
+g++-4.4 -c -O1 -Wall -fPIC -I/home/sarotti/GuidedMapping -I/usr/local/Aria/include -I/usr/local/include Comparison.cpp -MM -MT ../obj/Comparison.o -MF ../obj/Comparison.o.d
+g++-4.4 -c -O1 -Wall -fPIC -I/home/sarotti/GuidedMapping -I/usr/local/Aria/include -I/usr/local/include Comparison.cpp -o ../obj/Comparison.o
+In file included from Object.H:10,
+                 from Comparison.cpp:7:
+PointAndSurface.H: In constructor ‘Surface::Surface(const PointXY&, const PointXY&, bool)’:
+PointAndSurface.H:135: warning: ‘Surface::isAnObstacle’ will be initialized after
+PointAndSurface.H:128: warning:   ‘bool Surface::p1Occluding’
+PointAndSurface.H:163: warning:   when initialized here
+In file included from Plotting.H:16,
+                 from Comparison.cpp:11:
+PathPlanning.H: In constructor ‘Destination::Destination()’:
+PathPlanning.H:74: warning: ‘Destination::attemptsToAvoidObstacles’ will be initialized after
+PathPlanning.H:71: warning:   ‘double Destination::angle’
+PathPlanning.H:79: warning:   when initialized here
+Comparison.cpp: In function ‘void readInput(char*)’:
+Comparison.cpp:66: warning: comparison between signed and unsigned integer expressions
+Comparison.cpp: In function ‘void readDPSLAMInput(char*)’:
+Comparison.cpp:191: warning: unused variable ‘lNum’
+Comparison.cpp:191: warning: unused variable ‘laser’
+Comparison.cpp: In function ‘void readCarmenInput(char*)’:
+Comparison.cpp:329: warning: unused variable ‘lNum’
+Comparison.cpp:329: warning: unused variable ‘laser’
+Comparison.cpp: In function ‘void readAlbotInput4DPSLAM(int)’:
+Comparison.cpp:476: warning: comparison between signed and unsigned integer expressions
+Comparison.cpp: In function ‘void readAlbotKBCInput()’:
+Comparison.cpp:604: warning: unused variable ‘time’
+Comparison.cpp: In function ‘void carmenToCarmenConverter()’:
+Comparison.cpp:797: warning: unused variable ‘howFar’
+Comparison.cpp:808: warning: ‘lastX’ may be used uninitialized in this function
+Comparison.cpp:808: warning: ‘lastY’ may be used uninitialized in this function
+Comparison.cpp: In function ‘void readAlbotKBCInput()’:
+Comparison.cpp:656: warning: ‘lastPoint’ may be used uninitialized in this function
+Comparison.cpp: In function ‘void carmenToAlbot1Converter()’:
+Comparison.cpp:875: warning: ‘lastX’ may be used uninitialized in this function
+Comparison.cpp:875: warning: ‘lastY’ may be used uninitialized in this function
+Comparison.cpp:875: warning: ‘lastAngle’ may be used uninitialized in this function
+g++-4.4 -c -O1 -Wall -fPIC -I/home/sarotti/GuidedMapping -I/usr/local/Aria/include -I/usr/local/include thesis.cpp -MM -MT ../obj/thesis.o -MF ../obj/thesis.o.d
+g++-4.4 -c -O1 -Wall -fPIC -I/home/sarotti/GuidedMapping -I/usr/local/Aria/include -I/usr/local/include thesis.cpp -o ../obj/thesis.o
+In file included from Object.H:10,
+                 from readAndwriteASCII.H:6,
+                 from thesis.cpp:3:
+PointAndSurface.H: In constructor ‘Surface::Surface(const PointXY&, const PointXY&, bool)’:
+PointAndSurface.H:135: warning: ‘Surface::isAnObstacle’ will be initialized after
+PointAndSurface.H:128: warning:   ‘bool Surface::p1Occluding’
+PointAndSurface.H:163: warning:   when initialized here
+In file included from Plotting.H:16,
+                 from thesis.cpp:4:
+PathPlanning.H: In constructor ‘Destination::Destination()’:
+PathPlanning.H:74: warning: ‘Destination::attemptsToAvoidObstacles’ will be initialized after
+PathPlanning.H:71: warning:   ‘double Destination::angle’
+PathPlanning.H:79: warning:   when initialized here
+thesis.cpp: In function ‘void printASingleScan()’:
+thesis.cpp:17: warning: deprecated conversion from string constant to ‘char*’
+g++-4.4 -c -O1 -Wall -fPIC -I/home/sarotti/GuidedMapping -I/usr/local/Aria/include -I/usr/local/include clipper.cpp -MM -MT ../obj/clipper.o -MF ../obj/clipper.o.d
+g++-4.4 -c -O1 -Wall -fPIC -I/home/sarotti/GuidedMapping -I/usr/local/Aria/include -I/usr/local/include clipper.cpp -o ../obj/clipper.o
+g++-4.4 -c -O1 -Wall -fPIC -I/home/sarotti/GuidedMapping -I/usr/local/Aria/include -I/usr/local/include mapWholeFloor.cpp -MM -MT ../obj/mapWholeFloor.o -MF ../obj/mapWholeFloor.o.d
+g++-4.4 -c -O1 -Wall -fPIC -I/home/sarotti/GuidedMapping -I/usr/local/Aria/include -I/usr/local/include mapWholeFloor.cpp -o ../obj/mapWholeFloor.o
+mapWholeFloor.cpp:209: warning: "/*" within comment
+mapWholeFloor.cpp:226: warning: "/*" within comment
+mapWholeFloor.cpp:268: warning: "/*" within comment
+mapWholeFloor.cpp:291: warning: "/*" within comment
+mapWholeFloor.cpp:405: warning: "/*" within comment
+mapWholeFloor.cpp:440: warning: "/*" within comment
+mapWholeFloor.cpp:509: warning: "/*" within comment
+In file included from Object.H:10,
+                 from readAndwriteASCII.H:6,
+                 from mapWholeFloor.cpp:17:
+PointAndSurface.H: In constructor ‘Surface::Surface(const PointXY&, const PointXY&, bool)’:
+PointAndSurface.H:135: warning: ‘Surface::isAnObstacle’ will be initialized after
+PointAndSurface.H:128: warning:   ‘bool Surface::p1Occluding’
+PointAndSurface.H:163: warning:   when initialized here
+In file included from Plotting.H:16,
+                 from mapWholeFloor.cpp:18:
+PathPlanning.H: In constructor ‘Destination::Destination()’:
+PathPlanning.H:74: warning: ‘Destination::attemptsToAvoidObstacles’ will be initialized after
+PathPlanning.H:71: warning:   ‘double Destination::angle’
+PathPlanning.H:79: warning:   when initialized here
+g++-4.4 -c -O1 -Wall -fPIC -I/home/sarotti/GuidedMapping -I/usr/local/Aria/include -I/usr/local/include GXplorationAndMapping.cpp -MM -MT ../obj/GXplorationAndMapping.o -MF ../obj/GXplorationAndMapping.o.d
+g++-4.4 -c -O1 -Wall -fPIC -I/home/sarotti/GuidedMapping -I/usr/local/Aria/include -I/usr/local/include GXplorationAndMapping.cpp -o ../obj/GXplorationAndMapping.o
+In file included from Object.H:10,
+                 from readAndwriteASCII.H:6,
+                 from GXplorationAndMapping.cpp:17:
+PointAndSurface.H: In constructor ‘Surface::Surface(const PointXY&, const PointXY&, bool)’:
+PointAndSurface.H:135: warning: ‘Surface::isAnObstacle’ will be initialized after
+PointAndSurface.H:128: warning:   ‘bool Surface::p1Occluding’
+PointAndSurface.H:163: warning:   when initialized here
+In file included from Plotting.H:16,
+                 from GXplorationAndMapping.cpp:18:
+PathPlanning.H: In constructor ‘Destination::Destination()’:
+PathPlanning.H:74: warning: ‘Destination::attemptsToAvoidObstacles’ will be initialized after
+PathPlanning.H:71: warning:   ‘double Destination::angle’
+PathPlanning.H:79: warning:   when initialized here
+GXplorationAndMapping.cpp: In function ‘int main(int, char**)’:
+GXplorationAndMapping.cpp:121: warning: unused variable ‘computeASR’
+g++-4.4 -c -O1 -Wall -fPIC -I/home/sarotti/GuidedMapping -I/usr/local/Aria/include -I/usr/local/include errorMap.cpp -MM -MT ../obj/errorMap.o -MF ../obj/errorMap.o.d
+g++-4.4 -c -O1 -Wall -fPIC -I/home/sarotti/GuidedMapping -I/usr/local/Aria/include -I/usr/local/include errorMap.cpp -o ../obj/errorMap.o
+In file included from Object.H:10,
+                 from readAndwriteASCII.H:6,
+                 from errorMap.cpp:16:
+PointAndSurface.H: In constructor ‘Surface::Surface(const PointXY&, const PointXY&, bool)’:
+PointAndSurface.H:135: warning: ‘Surface::isAnObstacle’ will be initialized after
+PointAndSurface.H:128: warning:   ‘bool Surface::p1Occluding’
+PointAndSurface.H:163: warning:   when initialized here
+In file included from Plotting.H:16,
+                 from errorMap.cpp:17:
+PathPlanning.H: In constructor ‘Destination::Destination()’:
+PathPlanning.H:74: warning: ‘Destination::attemptsToAvoidObstacles’ will be initialized after
+PathPlanning.H:71: warning:   ‘double Destination::angle’
+PathPlanning.H:79: warning:   when initialized here
+errorMap.cpp: In function ‘int main(int, char**)’:
+errorMap.cpp:105: warning: unused variable ‘computeASR’
+errorMap.cpp:134: warning: unused variable ‘angleError’
+errorMap.cpp:134: warning: unused variable ‘distanceError’
+errorMap.cpp:142: warning: unused variable ‘ASRNumber’
+errorMap.cpp:209: warning: unused variable ‘exitCrossed’
+g++-4.4 -c -O1 -Wall -fPIC -I/home/sarotti/GuidedMapping -I/usr/local/Aria/include -I/usr/local/include errorMapWholeFloor.cpp -MM -MT ../obj/errorMapWholeFloor.o -MF ../obj/errorMapWholeFloor.o.d
+g++-4.4 -c -O1 -Wall -fPIC -I/home/sarotti/GuidedMapping -I/usr/local/Aria/include -I/usr/local/include errorMapWholeFloor.cpp -o ../obj/errorMapWholeFloor.o
+In file included from Object.H:10,
+                 from readAndwriteASCII.H:6,
+                 from errorMapWholeFloor.cpp:17:
+PointAndSurface.H: In constructor ‘Surface::Surface(const PointXY&, const PointXY&, bool)’:
+PointAndSurface.H:135: warning: ‘Surface::isAnObstacle’ will be initialized after
+PointAndSurface.H:128: warning:   ‘bool Surface::p1Occluding’
+PointAndSurface.H:163: warning:   when initialized here
+In file included from Plotting.H:16,
+                 from errorMapWholeFloor.cpp:18:
+PathPlanning.H: In constructor ‘Destination::Destination()’:
+PathPlanning.H:74: warning: ‘Destination::attemptsToAvoidObstacles’ will be initialized after
+PathPlanning.H:71: warning:   ‘double Destination::angle’
+PathPlanning.H:79: warning:   when initialized here
+errorMapWholeFloor.cpp: In function ‘int main()’:
+errorMapWholeFloor.cpp:284: warning: comparison between signed and unsigned integer expressions
+errorMapWholeFloor.cpp:207: warning: unused variable ‘angle’
+errorMapWholeFloor.cpp:208: warning: unused variable ‘distance’
+errorMapWholeFloor.cpp:229: warning: unused variable ‘exitCounter’
+errorMapWholeFloor.cpp:230: warning: unused variable ‘exitCrossed’
+errorMapWholeFloor.cpp:241: warning: unused variable ‘usedRefDistanceError’
+errorMapWholeFloor.cpp:241: warning: unused variable ‘usedRefAngleError’
+errorMapWholeFloor.cpp:49: warning: unused variable ‘saveFrom’
+errorMapWholeFloor.cpp:49: warning: unused variable ‘saveTo’
+errorMapWholeFloor.cpp:74: warning: unused variable ‘computeASR’
+g++-4.4 -c -O1 -Wall -fPIC -I/home/sarotti/GuidedMapping -I/usr/local/Aria/include -I/usr/local/include demo.cpp -MM -MT ../obj/demo.o -MF ../obj/demo.o.d
+g++-4.4 -c -O1 -Wall -fPIC -I/home/sarotti/GuidedMapping -I/usr/local/Aria/include -I/usr/local/include demo.cpp -o ../obj/demo.o
+g++-4.4 -c -O1 -Wall -fPIC -I/home/sarotti/GuidedMapping -I/usr/local/Aria/include -I/usr/local/include wander.cpp -MM -MT ../obj/wander.o -MF ../obj/wander.o.d
+g++-4.4 -c -O1 -Wall -fPIC -I/home/sarotti/GuidedMapping -I/usr/local/Aria/include -I/usr/local/include wander.cpp -o ../obj/wander.o
+g++-4.4 -c -O1 -Wall -fPIC -I/home/sarotti/GuidedMapping -I/usr/local/Aria/include -I/usr/local/include robotControl.cpp -MM -MT ../obj/robotControl.o -MF ../obj/robotControl.o.d
+g++-4.4 -c -O1 -Wall -fPIC -I/home/sarotti/GuidedMapping -I/usr/local/Aria/include -I/usr/local/include robotControl.cpp -o ../obj/robotControl.o
+g++-4.4 -c -O1 -Wall -fPIC -I/home/sarotti/GuidedMapping -I/usr/local/Aria/include -I/usr/local/include offlineMapping.cpp -MM -MT ../obj/offlineMapping.o -MF ../obj/offlineMapping.o.d
+g++-4.4 -c -O1 -Wall -fPIC -I/home/sarotti/GuidedMapping -I/usr/local/Aria/include -I/usr/local/include offlineMapping.cpp -o ../obj/offlineMapping.o
+In file included from Object.H:10,
+                 from readAndwriteASCII.H:6,
+                 from offlineMapping.cpp:16:
+PointAndSurface.H: In constructor ‘Surface::Surface(const PointXY&, const PointXY&, bool)’:
+PointAndSurface.H:135: warning: ‘Surface::isAnObstacle’ will be initialized after
+PointAndSurface.H:128: warning:   ‘bool Surface::p1Occluding’
+PointAndSurface.H:163: warning:   when initialized here
+In file included from Plotting.H:16,
+                 from offlineMapping.cpp:17:
+PathPlanning.H: In constructor ‘Destination::Destination()’:
+PathPlanning.H:74: warning: ‘Destination::attemptsToAvoidObstacles’ will be initialized after
+PathPlanning.H:71: warning:   ‘double Destination::angle’
+PathPlanning.H:79: warning:   when initialized here
+offlineMapping.cpp: In function ‘int main(int, char**)’:
+offlineMapping.cpp:81: warning: unused variable ‘computeASR’
+offlineMapping.cpp:190: warning: unused variable ‘n’
+offlineMapping.cpp:191: warning: unused variable ‘angleToMove’
+offlineMapping.cpp:192: warning: unused variable ‘distanceToMove’
+g++-4.4 -c -O1 -Wall -fPIC -I/home/sarotti/GuidedMapping -I/usr/local/Aria/include -I/usr/local/include Testboost.cpp -MM -MT ../obj/Testboost.o -MF ../obj/Testboost.o.d
+g++-4.4 -c -O1 -Wall -fPIC -I/home/sarotti/GuidedMapping -I/usr/local/Aria/include -I/usr/local/include Testboost.cpp -o ../obj/Testboost.o
+In file included from Object.H:10,
+                 from readAndwriteASCII.H:6,
+                 from Testboost.cpp:7:
+PointAndSurface.H: In constructor ‘Surface::Surface(const PointXY&, const PointXY&, bool)’:
+PointAndSurface.H:135: warning: ‘Surface::isAnObstacle’ will be initialized after
+PointAndSurface.H:128: warning:   ‘bool Surface::p1Occluding’
+PointAndSurface.H:163: warning:   when initialized here
+Testboost.cpp: In function ‘int main()’:
+Testboost.cpp:74: warning: comparison between signed and unsigned integer expressions
+Testboost.cpp:78: warning: comparison between signed and unsigned integer expressions
+Testboost.cpp: In function ‘bool polygonGen(std::vector<Object, std::allocator<Object> >, Point, std::vector<Object, std::allocator<Object> >, Point)’:
+Testboost.cpp:106: warning: comparison between signed and unsigned integer expressions
+Testboost.cpp:110: warning: comparison between signed and unsigned integer expressions
+Testboost.cpp:125: warning: comparison between signed and unsigned integer expressions
+Testboost.cpp:130: warning: comparison between signed and unsigned integer expressions
+Testboost.cpp: In function ‘void drawTwoOverlappingPics(std::vector<Object, std::allocator<Object> >, Point, std::vector<Object, std::allocator<Object> >, Point)’:
+Testboost.cpp:189: warning: comparison between signed and unsigned integer expressions
+Testboost.cpp:192: warning: comparison between signed and unsigned integer expressions
+Testboost.cpp:203: warning: comparison between signed and unsigned integer expressions
+Testboost.cpp:207: warning: comparison between signed and unsigned integer expressions
+Testboost.cpp: In function ‘void ConvertLogFile()’:
+Testboost.cpp:379: warning: unused variable ‘time’
+Testboost.cpp: In function ‘bool polygonGen(std::vector<Object, std::allocator<Object> >, Point, std::vector<Object, std::allocator<Object> >, Point)’:
+Testboost.cpp:98: warning: ‘Iarea’ may be used uninitialized in this function
+g++-4.4 -c -O1 -Wall -fPIC -I/home/sarotti/GuidedMapping -I/usr/local/Aria/include -I/usr/local/include localmapGen.cpp -MM -MT ../obj/localmapGen.o -MF ../obj/localmapGen.o.d
+g++-4.4 -c -O1 -Wall -fPIC -I/home/sarotti/GuidedMapping -I/usr/local/Aria/include -I/usr/local/include localmapGen.cpp -o ../obj/localmapGen.o
+In file included from Object.H:10,
+                 from readAndwriteASCII.H:6,
+                 from localmapGen.cpp:20:
+PointAndSurface.H: In constructor ‘Surface::Surface(const PointXY&, const PointXY&, bool)’:
+PointAndSurface.H:135: warning: ‘Surface::isAnObstacle’ will be initialized after
+PointAndSurface.H:128: warning:   ‘bool Surface::p1Occluding’
+PointAndSurface.H:163: warning:   when initialized here
+In file included from Plotting.H:16,
+                 from localmapGen.cpp:21:
+PathPlanning.H: In constructor ‘Destination::Destination()’:
+PathPlanning.H:74: warning: ‘Destination::attemptsToAvoidObstacles’ will be initialized after
+PathPlanning.H:71: warning:   ‘double Destination::angle’
+PathPlanning.H:79: warning:   when initialized here
+localmapGen.cpp: In function ‘int main()’:
+localmapGen.cpp:299: warning: comparison between signed and unsigned integer expressions
+localmapGen.cpp:569: warning: comparison between signed and unsigned integer expressions
+localmapGen.cpp:579: warning: comparison between signed and unsigned integer expressions
+localmapGen.cpp:603: warning: comparison between signed and unsigned integer expressions
+localmapGen.cpp:608: warning: comparison between signed and unsigned integer expressions
+localmapGen.cpp:641: warning: comparison between signed and unsigned integer expressions
+localmapGen.cpp:647: warning: comparison between signed and unsigned integer expressions
+localmapGen.cpp:677: warning: comparison between signed and unsigned integer expressions
+localmapGen.cpp:687: warning: comparison between signed and unsigned integer expressions
+localmapGen.cpp:812: warning: comparison between signed and unsigned integer expressions
+localmapGen.cpp:152: warning: unused variable ‘r’
+localmapGen.cpp:152: warning: unused variable ‘saveFrom’
+localmapGen.cpp:152: warning: unused variable ‘saveTo’
+localmapGen.cpp:200: warning: unused variable ‘odoLocalizationUsed’
+localmapGen.cpp:231: warning: unused variable ‘objInPreviousMFIS’
+localmapGen.cpp:233: warning: unused variable ‘LocalMapFileName’
+localmapGen.cpp: In function ‘bool intersect(std::vector<Object, std::allocator<Object> >, Point)’:
+localmapGen.cpp:893: warning: comparison between signed and unsigned integer expressions
+localmapGen.cpp: In function ‘bool detectIntersect(std::vector<Object, std::allocator<Object> >, Point)’:
+localmapGen.cpp:956: warning: comparison between signed and unsigned integer expressions
+localmapGen.cpp: In function ‘bool TwopathSegment(std::vector<Point, std::allocator<Point> >)’:
+localmapGen.cpp:1236: warning: comparison between signed and unsigned integer expressions
+localmapGen.cpp: In function ‘bool TwoPathAngle(std::vector<Point, std::allocator<Point> >)’:
+localmapGen.cpp:1342: warning: unused variable ‘k1’
+localmapGen.cpp:1342: warning: unused variable ‘k2’
+localmapGen.cpp:1345: warning: unused variable ‘norm’
+localmapGen.cpp: In function ‘bool TwopathSegment(std::vector<Point, std::allocator<Point> >)’:
+localmapGen.cpp:1333: warning: control reaches end of non-void function
+localmapGen.cpp: In function ‘bool detectIntersect(std::vector<Object, std::allocator<Object> >, Point)’:
+localmapGen.cpp:1135: warning: control reaches end of non-void function
+localmapGen.cpp: In function ‘bool intersect(std::vector<Object, std::allocator<Object> >, Point)’:
+localmapGen.cpp:924: warning: control reaches end of non-void function
+localmapGen.cpp: In function ‘bool TwopathSegment(std::vector<Point, std::allocator<Point> >)’:
+localmapGen.cpp:1227: warning: ‘line_x’ may be used uninitialized in this function
+localmapGen.cpp: In function ‘bool TwoPathAngle(std::vector<Point, std::allocator<Point> >)’:
+localmapGen.cpp:1343: warning: ‘angleTwoPath’ may be used uninitialized in this function
+localmapGen.cpp: In function ‘bool detectIntersect(std::vector<Object, std::allocator<Object> >, Point)’:
+localmapGen.cpp:948: warning: ‘line_x’ may be used uninitialized in this function
+g++-4.4 -c -O1 -Wall -fPIC -I/home/sarotti/GuidedMapping -I/usr/local/Aria/include -I/usr/local/include ExploringandReturn.cpp -MM -MT ../obj/ExploringandReturn.o -MF ../obj/ExploringandReturn.o.d
+g++-4.4 -c -O1 -Wall -fPIC -I/home/sarotti/GuidedMapping -I/usr/local/Aria/include -I/usr/local/include ExploringandReturn.cpp -o ../obj/ExploringandReturn.o
+ExploringandReturn.cpp:603: warning: "/*" within comment
+ExploringandReturn.cpp:636: warning: "/*" within comment
+In file included from Object.H:10,
+                 from readAndwriteASCII.H:6,
+                 from ExploringandReturn.cpp:17:
+PointAndSurface.H: In constructor ‘Surface::Surface(const PointXY&, const PointXY&, bool)’:
+PointAndSurface.H:135: warning: ‘Surface::isAnObstacle’ will be initialized after
+PointAndSurface.H:128: warning:   ‘bool Surface::p1Occluding’
+PointAndSurface.H:163: warning:   when initialized here
+In file included from Plotting.H:16,
+                 from ExploringandReturn.cpp:18:
+PathPlanning.H: In constructor ‘Destination::Destination()’:
+PathPlanning.H:74: warning: ‘Destination::attemptsToAvoidObstacles’ will be initialized after
+PathPlanning.H:71: warning:   ‘double Destination::angle’
+PathPlanning.H:79: warning:   when initialized here
+ExploringandReturn.cpp: In function ‘int main(int, char**)’:
+ExploringandReturn.cpp:152: warning: unused variable ‘computeASR’
+g++-4.4 -c -O1 -Wall -fPIC -I/home/sarotti/GuidedMapping -I/usr/local/Aria/include -I/usr/local/include localmap_Generation.cpp -MM -MT ../obj/localmap_Generation.o -MF ../obj/localmap_Generation.o.d
+g++-4.4 -c -O1 -Wall -fPIC -I/home/sarotti/GuidedMapping -I/usr/local/Aria/include -I/usr/local/include localmap_Generation.cpp -o ../obj/localmap_Generation.o
+In file included from Object.H:10,
+                 from readAndwriteASCII.H:6,
+                 from localmap_Generation.cpp:17:
+PointAndSurface.H: In constructor ‘Surface::Surface(const PointXY&, const PointXY&, bool)’:
+PointAndSurface.H:135: warning: ‘Surface::isAnObstacle’ will be initialized after
+PointAndSurface.H:128: warning:   ‘bool Surface::p1Occluding’
+PointAndSurface.H:163: warning:   when initialized here
+In file included from Plotting.H:16,
+                 from localmap_Generation.cpp:18:
+PathPlanning.H: In constructor ‘Destination::Destination()’:
+PathPlanning.H:74: warning: ‘Destination::attemptsToAvoidObstacles’ will be initialized after
+PathPlanning.H:71: warning:   ‘double Destination::angle’
+PathPlanning.H:79: warning:   when initialized here
+g++-4.4 -c -O1 -Wall -fPIC -I/home/sarotti/GuidedMapping -I/usr/local/Aria/include -I/usr/local/include convertlog.cpp -MM -MT ../obj/convertlog.o -MF ../obj/convertlog.o.d
+g++-4.4 -c -O1 -Wall -fPIC -I/home/sarotti/GuidedMapping -I/usr/local/Aria/include -I/usr/local/include convertlog.cpp -o ../obj/convertlog.o
+In file included from Object.H:10,
+                 from readAndwriteASCII.H:6,
+                 from convertlog.cpp:23:
+PointAndSurface.H: In constructor ‘Surface::Surface(const PointXY&, const PointXY&, bool)’:
+PointAndSurface.H:135: warning: ‘Surface::isAnObstacle’ will be initialized after
+PointAndSurface.H:128: warning:   ‘bool Surface::p1Occluding’
+PointAndSurface.H:163: warning:   when initialized here
+In file included from Plotting.H:16,
+                 from convertlog.cpp:24:
+PathPlanning.H: In constructor ‘Destination::Destination()’:
+PathPlanning.H:74: warning: ‘Destination::attemptsToAvoidObstacles’ will be initialized after
+PathPlanning.H:71: warning:   ‘double Destination::angle’
+PathPlanning.H:79: warning:   when initialized here
+convertlog.cpp: In function ‘void ConvertLogFile()’:
+convertlog.cpp:79: warning: unused variable ‘time’
+g++-4.4 -L/usr/local/Aria/lib  -O1 -lAria -lpthread -ldl -lrt  ../obj/mapWholeFloor.o ../obj/Object.o ../obj/Point.o ../obj/asr.o ../obj/GeometricOp.o ../obj/asrOp.o ../obj/PerceptualMapping.o ../obj/mfisOp.o ../obj/Mapping.o ../obj/readAndwriteASCII.o ../obj/Minfo.o ../obj/PointAndSurface.o ../obj/GeometryFuncs.o ../obj/GroupS.o ../obj/Transporter.o ../obj/Plotting.o ../obj/PathPlanning.o ../obj/Map.o ../obj/CompareASR.o ../obj/CompareASRClass.o ../obj/Laser2Surface.o ../obj/Polygon.o ../obj/PolygonChoice.o ../obj/space.o ../obj/display.o ../obj/convexPathPlanner.o ../obj/Comparison.o ../obj/thesis.o ../obj/clipper.o -o ../bin/mapWholeFloor
+g++-4.4 -L/usr/local/Aria/lib  -O1 -lAria -lpthread -ldl -lrt  ../obj/GXplorationAndMapping.o ../obj/Object.o ../obj/Point.o ../obj/asr.o ../obj/GeometricOp.o ../obj/asrOp.o ../obj/PerceptualMapping.o ../obj/mfisOp.o ../obj/Mapping.o ../obj/readAndwriteASCII.o ../obj/Minfo.o ../obj/PointAndSurface.o ../obj/GeometryFuncs.o ../obj/GroupS.o ../obj/Transporter.o ../obj/Plotting.o ../obj/PathPlanning.o ../obj/Map.o ../obj/CompareASR.o ../obj/CompareASRClass.o ../obj/Laser2Surface.o ../obj/Polygon.o ../obj/PolygonChoice.o ../obj/space.o ../obj/display.o ../obj/convexPathPlanner.o ../obj/Comparison.o ../obj/thesis.o ../obj/clipper.o -o ../bin/GXplorationAndMapping
+g++-4.4 -L/usr/local/Aria/lib  -O1 -lAria -lpthread -ldl -lrt  ../obj/errorMap.o ../obj/Object.o ../obj/Point.o ../obj/asr.o ../obj/GeometricOp.o ../obj/asrOp.o ../obj/PerceptualMapping.o ../obj/mfisOp.o ../obj/Mapping.o ../obj/readAndwriteASCII.o ../obj/Minfo.o ../obj/PointAndSurface.o ../obj/GeometryFuncs.o ../obj/GroupS.o ../obj/Transporter.o ../obj/Plotting.o ../obj/PathPlanning.o ../obj/Map.o ../obj/CompareASR.o ../obj/CompareASRClass.o ../obj/Laser2Surface.o ../obj/Polygon.o ../obj/PolygonChoice.o ../obj/space.o ../obj/display.o ../obj/convexPathPlanner.o ../obj/Comparison.o ../obj/thesis.o ../obj/clipper.o -o ../bin/errorMap
+g++-4.4 -L/usr/local/Aria/lib  -O1 -lAria -lpthread -ldl -lrt  ../obj/errorMapWholeFloor.o ../obj/Object.o ../obj/Point.o ../obj/asr.o ../obj/GeometricOp.o ../obj/asrOp.o ../obj/PerceptualMapping.o ../obj/mfisOp.o ../obj/Mapping.o ../obj/readAndwriteASCII.o ../obj/Minfo.o ../obj/PointAndSurface.o ../obj/GeometryFuncs.o ../obj/GroupS.o ../obj/Transporter.o ../obj/Plotting.o ../obj/PathPlanning.o ../obj/Map.o ../obj/CompareASR.o ../obj/CompareASRClass.o ../obj/Laser2Surface.o ../obj/Polygon.o ../obj/PolygonChoice.o ../obj/space.o ../obj/display.o ../obj/convexPathPlanner.o ../obj/Comparison.o ../obj/thesis.o ../obj/clipper.o -o ../bin/errorMapWholeFloor
+g++-4.4 -L/usr/local/Aria/lib  -O1 -lAria -lpthread -ldl -lrt  ../obj/demo.o ../obj/Object.o ../obj/Point.o ../obj/asr.o ../obj/GeometricOp.o ../obj/asrOp.o ../obj/PerceptualMapping.o ../obj/mfisOp.o ../obj/Mapping.o ../obj/readAndwriteASCII.o ../obj/Minfo.o ../obj/PointAndSurface.o ../obj/GeometryFuncs.o ../obj/GroupS.o ../obj/Transporter.o ../obj/Plotting.o ../obj/PathPlanning.o ../obj/Map.o ../obj/CompareASR.o ../obj/CompareASRClass.o ../obj/Laser2Surface.o ../obj/Polygon.o ../obj/PolygonChoice.o ../obj/space.o ../obj/display.o ../obj/convexPathPlanner.o ../obj/Comparison.o ../obj/thesis.o ../obj/clipper.o -o ../bin/demo
+g++-4.4 -L/usr/local/Aria/lib  -O1 -lAria -lpthread -ldl -lrt  ../obj/wander.o ../obj/Object.o ../obj/Point.o ../obj/asr.o ../obj/GeometricOp.o ../obj/asrOp.o ../obj/PerceptualMapping.o ../obj/mfisOp.o ../obj/Mapping.o ../obj/readAndwriteASCII.o ../obj/Minfo.o ../obj/PointAndSurface.o ../obj/GeometryFuncs.o ../obj/GroupS.o ../obj/Transporter.o ../obj/Plotting.o ../obj/PathPlanning.o ../obj/Map.o ../obj/CompareASR.o ../obj/CompareASRClass.o ../obj/Laser2Surface.o ../obj/Polygon.o ../obj/PolygonChoice.o ../obj/space.o ../obj/display.o ../obj/convexPathPlanner.o ../obj/Comparison.o ../obj/thesis.o ../obj/clipper.o -o ../bin/wander
+g++-4.4 -L/usr/local/Aria/lib  -O1 -lAria -lpthread -ldl -lrt  ../obj/robotControl.o ../obj/Object.o ../obj/Point.o ../obj/asr.o ../obj/GeometricOp.o ../obj/asrOp.o ../obj/PerceptualMapping.o ../obj/mfisOp.o ../obj/Mapping.o ../obj/readAndwriteASCII.o ../obj/Minfo.o ../obj/PointAndSurface.o ../obj/GeometryFuncs.o ../obj/GroupS.o ../obj/Transporter.o ../obj/Plotting.o ../obj/PathPlanning.o ../obj/Map.o ../obj/CompareASR.o ../obj/CompareASRClass.o ../obj/Laser2Surface.o ../obj/Polygon.o ../obj/PolygonChoice.o ../obj/space.o ../obj/display.o ../obj/convexPathPlanner.o ../obj/Comparison.o ../obj/thesis.o ../obj/clipper.o -o ../bin/robotControl
+g++-4.4 -L/usr/local/Aria/lib  -O1 -lAria -lpthread -ldl -lrt  ../obj/offlineMapping.o ../obj/Object.o ../obj/Point.o ../obj/asr.o ../obj/GeometricOp.o ../obj/asrOp.o ../obj/PerceptualMapping.o ../obj/mfisOp.o ../obj/Mapping.o ../obj/readAndwriteASCII.o ../obj/Minfo.o ../obj/PointAndSurface.o ../obj/GeometryFuncs.o ../obj/GroupS.o ../obj/Transporter.o ../obj/Plotting.o ../obj/PathPlanning.o ../obj/Map.o ../obj/CompareASR.o ../obj/CompareASRClass.o ../obj/Laser2Surface.o ../obj/Polygon.o ../obj/PolygonChoice.o ../obj/space.o ../obj/display.o ../obj/convexPathPlanner.o ../obj/Comparison.o ../obj/thesis.o ../obj/clipper.o -o ../bin/offlineMapping
+g++-4.4 -L/usr/local/Aria/lib  -O1 -lAria -lpthread -ldl -lrt  ../obj/Testboost.o ../obj/Object.o ../obj/Point.o ../obj/asr.o ../obj/GeometricOp.o ../obj/asrOp.o ../obj/PerceptualMapping.o ../obj/mfisOp.o ../obj/Mapping.o ../obj/readAndwriteASCII.o ../obj/Minfo.o ../obj/PointAndSurface.o ../obj/GeometryFuncs.o ../obj/GroupS.o ../obj/Transporter.o ../obj/Plotting.o ../obj/PathPlanning.o ../obj/Map.o ../obj/CompareASR.o ../obj/CompareASRClass.o ../obj/Laser2Surface.o ../obj/Polygon.o ../obj/PolygonChoice.o ../obj/space.o ../obj/display.o ../obj/convexPathPlanner.o ../obj/Comparison.o ../obj/thesis.o ../obj/clipper.o -o ../bin/Testboost
+g++-4.4 -L/usr/local/Aria/lib  -O1 -lAria -lpthread -ldl -lrt  ../obj/localmapGen.o ../obj/Object.o ../obj/Point.o ../obj/asr.o ../obj/GeometricOp.o ../obj/asrOp.o ../obj/PerceptualMapping.o ../obj/mfisOp.o ../obj/Mapping.o ../obj/readAndwriteASCII.o ../obj/Minfo.o ../obj/PointAndSurface.o ../obj/GeometryFuncs.o ../obj/GroupS.o ../obj/Transporter.o ../obj/Plotting.o ../obj/PathPlanning.o ../obj/Map.o ../obj/CompareASR.o ../obj/CompareASRClass.o ../obj/Laser2Surface.o ../obj/Polygon.o ../obj/PolygonChoice.o ../obj/space.o ../obj/display.o ../obj/convexPathPlanner.o ../obj/Comparison.o ../obj/thesis.o ../obj/clipper.o -o ../bin/localmapGen
+g++-4.4 -L/usr/local/Aria/lib  -O1 -lAria -lpthread -ldl -lrt  ../obj/ExploringandReturn.o ../obj/Object.o ../obj/Point.o ../obj/asr.o ../obj/GeometricOp.o ../obj/asrOp.o ../obj/PerceptualMapping.o ../obj/mfisOp.o ../obj/Mapping.o ../obj/readAndwriteASCII.o ../obj/Minfo.o ../obj/PointAndSurface.o ../obj/GeometryFuncs.o ../obj/GroupS.o ../obj/Transporter.o ../obj/Plotting.o ../obj/PathPlanning.o ../obj/Map.o ../obj/CompareASR.o ../obj/CompareASRClass.o ../obj/Laser2Surface.o ../obj/Polygon.o ../obj/PolygonChoice.o ../obj/space.o ../obj/display.o ../obj/convexPathPlanner.o ../obj/Comparison.o ../obj/thesis.o ../obj/clipper.o -o ../bin/ExploringandReturn
+g++-4.4 -L/usr/local/Aria/lib  -O1 -lAria -lpthread -ldl -lrt  ../obj/localmap_Generation.o ../obj/Object.o ../obj/Point.o ../obj/asr.o ../obj/GeometricOp.o ../obj/asrOp.o ../obj/PerceptualMapping.o ../obj/mfisOp.o ../obj/Mapping.o ../obj/readAndwriteASCII.o ../obj/Minfo.o ../obj/PointAndSurface.o ../obj/GeometryFuncs.o ../obj/GroupS.o ../obj/Transporter.o ../obj/Plotting.o ../obj/PathPlanning.o ../obj/Map.o ../obj/CompareASR.o ../obj/CompareASRClass.o ../obj/Laser2Surface.o ../obj/Polygon.o ../obj/PolygonChoice.o ../obj/space.o ../obj/display.o ../obj/convexPathPlanner.o ../obj/Comparison.o ../obj/thesis.o ../obj/clipper.o -o ../bin/localmap_Generation
+g++-4.4 -L/usr/local/Aria/lib  -O1 -lAria -lpthread -ldl -lrt  ../obj/convertlog.o ../obj/Object.o ../obj/Point.o ../obj/asr.o ../obj/GeometricOp.o ../obj/asrOp.o ../obj/PerceptualMapping.o ../obj/mfisOp.o ../obj/Mapping.o ../obj/readAndwriteASCII.o ../obj/Minfo.o ../obj/PointAndSurface.o ../obj/GeometryFuncs.o ../obj/GroupS.o ../obj/Transporter.o ../obj/Plotting.o ../obj/PathPlanning.o ../obj/Map.o ../obj/CompareASR.o ../obj/CompareASRClass.o ../obj/Laser2Surface.o ../obj/Polygon.o ../obj/PolygonChoice.o ../obj/space.o ../obj/display.o ../obj/convexPathPlanner.o ../obj/Comparison.o ../obj/thesis.o ../obj/clipper.o -o ../bin/convertlog
