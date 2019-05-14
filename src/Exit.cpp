@@ -2188,3 +2188,61 @@ Exit confirm_exit_position(vector<Object> view, Object exit)
 }
 
 
+Exit most_constrain_exit_cross_path(vector<Object> view, Object path_segment)
+{
+            Exit constrain_exit;
+    
+            vector<Exit> potential_exits = Potentialine_basePoints(view, path_segment);
+
+            double min = 0;
+            for(int j = 0; j < potential_exits.size(); j++)
+            {
+                if(twoLinintersect(potential_exits[j].getP1(), potential_exits[j].getP2(), path_segment.getP1(), path_segment.getP2()) == true)
+                {
+                    if(j == 0)
+                    {
+                            if((potential_exits[j].getP1() != view[0].getP1())
+                                && (potential_exits[j].getP2() != view.back().getP2()))
+                            {
+                                min = potential_exits[j].length();
+                                constrain_exit = potential_exits[j];
+                            }
+                    }
+                    else
+                    {
+                            if((min > potential_exits[j].length()) && (min != 0))
+                            {
+                                min = potential_exits[j].length();
+                                constrain_exit = potential_exits[j];
+                            }
+                            else
+                            {
+                                    if(min == 0)
+                                    {
+                                        min = potential_exits[j].length();
+                                        constrain_exit = potential_exits[j];
+                                    }
+                            }
+                    }
+                }
+            }
+            
+            Object specific_surface;
+            for(int i = 0; i < view.size(); i++)
+            {
+                if((view[i].getP1() == constrain_exit.getP2())
+                    || (view[i].getP2() == constrain_exit.getP2()))
+                {
+                    specific_surface = view[i];
+                    break;
+                }
+            }
+            
+            if(P_To_ShortestDistance(constrain_exit.getP1(), specific_surface) < constrain_exit.length())
+            {
+                Point p = crossPerpend(specific_surface.getP1(), specific_surface.getP2(), constrain_exit.getP1());
+                constrain_exit.set(constrain_exit.X1(), constrain_exit.Y1(), p.X(), p.Y());
+            }
+            
+            return constrain_exit;
+}

@@ -994,13 +994,41 @@ lb_pi:                          Object aLine = makeLineAtTwoPointsWithObject(coo
                         plotObjectsOf3KindswithExits(mfisFileName, MFIS, current_regions.back(), plot_exit);
                         
                         //find the gap it is to cross
-                        vector<Object> left_cluster, right_cluster;
+                        Object path_segment, temp1, temp2;
+                        vector<Object> temp3;
                         Exit to_cross_gap, project_gap;
                         
+                        path_segment.set(lastStepInfo.getRobotPosition()[6].getP1().X(), lastStepInfo.getRobotPosition()[6].getP1().Y(), 
+                                    currentRobotPositionInMFIS[6].getP1().X(), currentRobotPositionInMFIS[6].getP1().Y(), 0);
                         
-                        
+                        to_cross_gap = most_constrain_exit_cross_path(MFIS, path_segment);
+                        temp1.set(to_cross_gap.X1(), to_cross_gap.Y1(), to_cross_gap.X2(), to_cross_gap.Y2(), 0);
+                        temp1.reverse();
                         //compute the potential gap on left side
+                        temp2 = remakeLineP2(temp1, boundary1 , boundary2, boundary2.getID(), 0,2);
+                        temp3.push_back(temp1);
+                        temp3.push_back(temp2);
+                        group1.clear();
+                        group2.clear();
+                        plot_exit.clear();
                         
+                        for(int m = 0; m < MFIS.size(); m++)
+                        {
+                            if((temp2.distP1ToP1(MFIS[m]) < 2000) || (temp2.distP1ToP2(MFIS[m]) < 2000))
+                                group1.push_back(MFIS[m]);
+                            else
+                            {
+                                if((temp2.distP2ToP1(MFIS[m]) < 2000) || (temp2.distP2ToP2(MFIS[m]) < 2000))
+                                    group2.push_back(MFIS[m]);
+                            }
+                        }
+                        
+                        //compute the rough position of the exit
+                        last_region_exit = shortestExit(group1, group2);
+                        plot_exit.push_back(last_region_exit);
+                        sprintf(mfisFileName, "%s%d%s", "Maps/Offline/robot_and_view_and_exit-", v, ".png");                   
+                        //plotObjectsOf3KindswithExits(mfisFileName, MFIS, current_regions.back(), plot_exit);
+                        plotObjectsOf3Kinds(mfisFileName, MFIS, temp3, temp3);
                         
                         familiar_flag = 1;
                         function_switch_Flag = 1;

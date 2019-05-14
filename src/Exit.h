@@ -144,5 +144,7 @@ vector<Object> trim_boundary_base_exit_region(vector<Object> boundary, Exit exit
 
 Exit confirm_exit_position(vector<Object> view, Object exit);
 
+Exit most_constrain_exit_cross_path(vector<Object> view, Object path_segment);
+
 #endif /* EXIT_H */ 
 
