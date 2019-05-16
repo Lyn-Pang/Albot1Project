@@ -1014,21 +1014,31 @@ lb_pi:                          Object aLine = makeLineAtTwoPointsWithObject(coo
                         
                         for(int m = 0; m < MFIS.size(); m++)
                         {
-                            if((temp2.distP1ToP1(MFIS[m]) < 2000) || (temp2.distP1ToP2(MFIS[m]) < 2000))
+                            if(shortestDistanceBtwTwoObjects(temp2, MFIS[m]) < 600)
                                 group1.push_back(MFIS[m]);
-                            else
+                            
+                        }
+                        
+                        for(int m = 0; m < group1.size()-1; m++)
+                        {
+                            Object temp_gap;
+                            if((shortestDistanceBtwTwoObjects(group1[m], group1[m+1]) > 2000)
+                                && (shortestDistanceBtwTwoObjects(group1[m], group1[m+1]) <3000))
                             {
-                                if((temp2.distP2ToP1(MFIS[m]) < 2000) || (temp2.distP2ToP2(MFIS[m]) < 2000))
-                                    group2.push_back(MFIS[m]);
+                                temp_gap.set(group1[m].midpoint().X(), group1[m].midpoint().Y(), group1[m+1].midpoint().X(), group1[m+1].midpoint().Y(), m);
+                                group2.push_back(temp_gap);
                             }
                         }
+                        
+                        group2.push_back(temp1);
+                        group2 = breakTheLinesInto(group2);
                         
                         //compute the rough position of the exit
                         last_region_exit = shortestExit(group1, group2);
                         plot_exit.push_back(last_region_exit);
                         sprintf(mfisFileName, "%s%d%s", "Maps/Offline/robot_and_view_and_exit-", v, ".png");                   
                         //plotObjectsOf3KindswithExits(mfisFileName, MFIS, current_regions.back(), plot_exit);
-                        plotObjectsOf3Kinds(mfisFileName, MFIS, temp3, temp3);
+                        plotObjectsOf4Kinds(mfisFileName, MFIS, current_regions.back(), group1, group2);
                         
                         familiar_flag = 1;
                         function_switch_Flag = 1;
