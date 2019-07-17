@@ -352,27 +352,9 @@ int main()
     
     //cout << "..........MFIS.........." << endl;
     displayObjects(MFIS);
-    //NewLM = currentView; // first local map
-    //GlobalLM = currentView;
-
-    allASR = currentView;
-    MapofLMs = NewLM; // the first local map in global
-
-    //currentPG = makePolygonOfCV(NewLM); // first local to generate polygon
-    //Memories.push_back(NewLM); //store the first local map as first memory
-    //currentTransLM = NewLM; // the first one does not to transform
 
     exitsFromcurrentLM = findGapasExits(NewLM); // initial exits in first view/local environment
 
-    sprintf(viewFileName, "%s%d%s", "Maps/Offline/LocalMap-", v, ".png");
-    plotObjects(viewFileName, myrobot.getRobot(), NewLM);
-    
-    //--- Local map and chunk process ---//
-    //ALLlocalMap = NewLM;
- 
-    //initialization of local maps
-    //LMS = TransViewIntoGloabl(ALLlocalMap, NewLM, Point (0,0), myrobot.getRobot(), 0, 1);
-    Global_ASR = currentView;
     //robpositions.push_back(Point (currentRobotPositionInMFIS[6].X1(), currentRobotPositionInMFIS[6].Y1()));
     robot_Positions.push_back(currentRobotPositionInMFIS);
     robot_points.push_back(Point (currentRobotPositionInMFIS[6].X1(), currentRobotPositionInMFIS[6].Y1()));              
@@ -407,7 +389,7 @@ int main()
 
     vector<Object> errorMap = currentView; //odometric error map initialization
 
-    exitsFromCV = findShortestExits(currentView);
+    possible_exits_in_MFIS = exitsFromCV = findShortestExits(currentView);
             sprintf(mfisFileName, "%s%d%s", "Maps/Offline/view&exits-", 1, ".png");                   
             plotObjectsOf3KindswithExits(mfisFileName, currentView, currentRobotPositionInMFIS, exitsFromCV);
 
@@ -581,9 +563,11 @@ lb_pi:                          Object aLine = makeLineAtTwoPointsWithObject(coo
 
             transformed_view = TransformforToGlobalCoordinate(currentView, currentRobotPositionInMFIS[6].getP1(), currentRobotPositionInMFIS, currentRobotPositionInMFIS[7].getAngleWithXaxis());   
             
-            //exitsFromCV = findShortestExits(transformed_view);
-            //sprintf(mfisFileName, "%s%d%s", "Maps/Offline/View&Exit-",v,".png");                   
-            //plotObjectsOf3KindswithExits(mfisFileName, transformed_view, currentRobotPositionInMFIS,exitsFromCV);
+            exitsFromCV = findShortestExits(transformed_view);
+            possible_exits_in_MFIS = addTwoExits(possible_exits_in_MFIS, exitsFromCV);
+            
+            sprintf(mfisFileName, "%s%d%s", "Maps/Offline/View&Exit-",v,".png");                   
+            plotObjectsOf3KindswithExits(mfisFileName, transformed_view, currentRobotPositionInMFIS,exitsFromCV);
             
             if(PI_switch_Flag == 1)
             {
@@ -637,6 +621,7 @@ lb_pi:                          Object aLine = makeLineAtTwoPointsWithObject(coo
             
             if(Global_ASR.size() != 0)
                 plotObjectsOf4Kinds(mfisFileName, myrobot.getRobot(), currentRobotPositionInMFIS, MFIS, Global_ASR);
+
                 
 
             recognizedTargetObjectInPV = recognizedTargetObjects.getTargetObjects();

@@ -146,5 +146,8 @@ Exit confirm_exit_position(vector<Object> view, Object exit);
 
 Exit most_constrain_exit_cross_path(vector<Object> view, Object path_segment);
 
+
+vector<Exit> crossed_exits_along_path(vector<Exit> exits, vector<Object> path_in_mfis);
+
 #endif /* EXIT_H */ 
 

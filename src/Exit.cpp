@@ -2246,3 +2246,39 @@ Exit most_constrain_exit_cross_path(vector<Object> view, Object path_segment)
             
             return constrain_exit;
 }
+
+vector<Exit> crossed_exits_along_path(vector<Exit> exits, vector<Object> path_in_mfis)
+{
+    
+    vector<Exit> temp;
+    
+    for(int i = 0; i < exits.size(); i++)
+    {
+        for(int j = 0; j < path_in_mfis.size(); j++)
+        {
+            if(twoLinintersect(exits[i].getP1(), exits[i].getP2(), path_in_mfis[j].getP1(), path_in_mfis[j].getP2()) == true)
+            {
+                temp.push_back(exits[i]);
+                break;
+            }
+        }
+    }
+    
+    
+    for(int i = 0; i < temp.size(); i++)
+    {
+        for(int j = i+1; j < temp.size(); j++)
+        {
+            if((distanceOftwoP(temp[i].getP1(), temp[j].getP1()) < 500 && distanceOftwoP(temp[i].getP2(), temp[j].getP2()) < 500)
+                || (distanceOftwoP(temp[i].getP1(), temp[j].getP1()) < 500 && distanceOftwoP(temp[i].getmidPoint(), temp[j].getmidPoint()) < 500)
+                || (distanceOftwoP(temp[i].getP2(), temp[j].getP2()) < 500 && distanceOftwoP(temp[i].getmidPoint(), temp[j].getmidPoint()) < 500))
+            {
+                temp.erase(temp.begin()+j);
+                j--;
+            }
+        }
+    }
+    
+    
+    return temp;
+}
