@@ -111,5 +111,8 @@ Object base_line_for_geometry(vector<Object> view, vector<Object> robot, Exit ex
 vector<Object> collect_object_base_side(vector<Object> view, Object one_side);
 Exit most_constrain_gap(vector<Object> group1, vector<Object> group2);
 
+
+Object shift_line_along_perpendicluar(Object line, double shift_distance, int side);
+
 #endif /* STRUCTBOUNDARY_H */
 

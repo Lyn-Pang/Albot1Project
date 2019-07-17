@@ -2996,7 +2996,7 @@ pair< vector<Object>, vector<Object> > update_geo_map(vector< vector<Object> > v
 {
     
     
-    int cnt = 25;
+    int cnt = 0;
     
     vector<Point> points;
     vector<Object> path;
@@ -3217,6 +3217,8 @@ vector<Object> geometry_sides(vector< vector<Object> > sides)
     return temp;
     
 }
+
+
 
 Object track_geometry(vector<Object> view, vector<Object> robot, Object ref_line)
 {
@@ -3479,7 +3481,114 @@ Exit most_constrain_gap(vector<Object> group1, vector<Object> group2)
     return rnt;
 }
 
+/*
+vector<Object> geometry_sides(vector<Object> map)
+{
+    Point p1, p2, p3, p4;
+    Object side1, side2, side3, side4;
+    
+    vector<Object> large_surfaces;
+    vector< vector<Object> > clusters; 
+    
+    //large surface
+    for(int i = 0; i < map.size(); i++)
+    {
+        if(map[i].length() >= 500)
+            large_surfaces.push_back(map[i]);
+    }
+    
+    //remove redundant surface
+    for(int i = 0; i < large_surfaces.size(); i++)
+    {
+        for(int j = i + 1; j < large_surfaces.size(); j++)
+        {
+            double expAngle = large_surfaces[j].getAngleWithLine(large_surfaces[i]);
+            double expDist = shortestDistanceBtwTwoObjects(large_surfaces[j], large_surfaces[i]);
 
+            //matched information 
+            if ((abs(expAngle) < 10.0 || abs(expAngle) > 350.0) && (expDist < 500.0))
+            {
+                if(large_surfaces[j].length() > large_surfaces[i].length())
+                {
+                    large_surfaces.erase(large_surfaces.begin() + i);
+                    i--;
+                    break;
+                }
+                else
+                {
+                    if(large_surfaces[j].length() <= large_surfaces[i].length())
+                    {
+                        large_surfaces.erase(large_surfaces.begin() + j);
+                        j--;
+                    }
+                }
+            }
+        }
+    }
+    
+    //cluster 
+    int cnt = 0;
+    vector<Object> group;
+    group.push_back(large_surfaces[cnt]);
+    for(int i = 0; i < large_surfaces.size(); i++)
+    {
+        
+        if(shortestDistanceBtwTwoObjects(group[0], large_surfaces[i]) < 500)
+        {
+            group.push_back(large_surfaces[i]);
+            large_surfaces.erase(large_surfaces.begin()+i);
+            i--;
+        }
+        else
+        {
+            if(cnt == 0)
+                cnt = i;
+        }
+        
+        if(i == large_surfaces.size()-1)
+        {
+            clusters.push_back(group);
+            group.clear();
+            i = cnt;
+            
+            //empty set
+            if(large_surfaces.size() == 0)
+                break;
+            else
+                group.push_back(group.push_back(large_surfaces[cnt]));
+            
+            
+        }
+    }
+    
+    //form the ref side 
+    Object ref_side;
+    
+    for(int i = 0; i < clusters.size(); i++)
+    {
+        
+    }
+    
+    //opposite side
+    
+    
+    //one perpendicular side
+    
+    //the last side
+    
+}*/
 
+Object shift_line_along_perpendicluar(Object line, double shift_distance, int side)
+{
+    Point shift_p1, shift_p2;
+    Object shift_object;
+    
+    shift_p1 = outSidePerpendPointWithLength(line, shift_distance, line.getP1(), side);
+    shift_p2 = outSidePerpendPointWithLength(line, shift_distance, line.getP2(), side);
+            
+            
+    shift_object.set(shift_p1.X(), shift_p1.Y(), shift_p2.X(), shift_p2.Y(), line.getID());
+    return shift_object;
+}
 
 

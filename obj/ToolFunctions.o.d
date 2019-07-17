@@ -140,4 +140,5 @@
  polygons.h space.h Plotting.H asrOp.H GroupS.H Minfo.H Transporter.H \
  ChunksOp.H Ellipse.h Map.H Memory.h Laser2Surface.H \
  /usr/local/Aria/include/ariaUtil.h \
- /usr/local/Aria/include/ArSensorReading.h GeometricOp.H clipper.hpp
+ /usr/local/Aria/include/ArSensorReading.h GeometricOp.H clipper.hpp \
+ CompareASR.H

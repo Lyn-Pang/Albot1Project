@@ -21,6 +21,7 @@
 #include "Laser2Surface.H"
 #include "GeometricOp.H"
 #include "ChunksOp.H"
+#include "CompareASR.H"
 
 
 #define  PI  3.14159265;
@@ -885,3 +886,21 @@ vector<Object> adjust_box_temporary_2(vector<Object> sides_of_geo, vector<Object
 
             return test;
 }
+
+/*
+bool is_extend_line(Object line1, Object line2)
+{
+    int flag = 0;
+    
+    if(shortestDistanceBtwTwoObjects() < 500)
+    {
+        
+    }
+    
+    if(flag == 1)
+        return true;
+    else
+        return false;
+}
+*/
+
