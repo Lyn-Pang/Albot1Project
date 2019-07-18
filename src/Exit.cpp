@@ -15,6 +15,7 @@
 #include "GeometricOp.H"
 #include "Plotting.H"
 #include "GeometryAndExit.h"
+#include "CompareASR.H"
 
 /* identify perpendicular line based on each path
  * segment, which is to depict an exit between 
@@ -2249,9 +2250,11 @@ Exit most_constrain_exit_cross_path(vector<Object> view, Object path_segment)
 
 vector<Exit> crossed_exits_along_path(vector<Exit> exits, vector<Object> path_in_mfis)
 {
-    
+    double size_threshold = 1500;
+    double dist_threshold = 1000;
     vector<Exit> temp;
     
+    //collect crossed gaps
     for(int i = 0; i < exits.size(); i++)
     {
         for(int j = 0; j < path_in_mfis.size(); j++)
@@ -2264,18 +2267,30 @@ vector<Exit> crossed_exits_along_path(vector<Exit> exits, vector<Object> path_in
         }
     }
     
-    
+    //filter same gap
     for(int i = 0; i < temp.size(); i++)
     {
         for(int j = i+1; j < temp.size(); j++)
         {
-            if((distanceOftwoP(temp[i].getP1(), temp[j].getP1()) < 500 && distanceOftwoP(temp[i].getP2(), temp[j].getP2()) < 500)
-                || (distanceOftwoP(temp[i].getP1(), temp[j].getP1()) < 500 && distanceOftwoP(temp[i].getmidPoint(), temp[j].getmidPoint()) < 500)
-                || (distanceOftwoP(temp[i].getP2(), temp[j].getP2()) < 500 && distanceOftwoP(temp[i].getmidPoint(), temp[j].getmidPoint()) < 500))
+            if((distanceOftwoP(temp[i].getP1(), temp[j].getP1()) < dist_threshold && distanceOftwoP(temp[i].getP2(), temp[j].getP2()) < dist_threshold)
+                || (distanceOftwoP(temp[i].getP1(), temp[j].getP1()) < dist_threshold && distanceOftwoP(temp[i].getmidPoint(), temp[j].getmidPoint()) < dist_threshold)
+                || (distanceOftwoP(temp[i].getP2(), temp[j].getP2()) < dist_threshold && distanceOftwoP(temp[i].getmidPoint(), temp[j].getmidPoint()) < dist_threshold))
+                    //|| Perpendiculardistance(temp[i].getP1(), temp[i].getP2(), temp[j].getP1()) < 500
+                    //|| Perpendiculardistance(temp[i].getP1(), temp[i].getP2(), temp[j].getP2()) < 500)
             {
                 temp.erase(temp.begin()+j);
                 j--;
             }
+        }
+    }
+    
+    //filter large gap
+    for(int i = 0; i < temp.size(); i++)
+    {
+        if(temp[i].length() > size_threshold)
+        {
+            temp.erase(temp.begin()+i);
+            i--;
         }
     }
     

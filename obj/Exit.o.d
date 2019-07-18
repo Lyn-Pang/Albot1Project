@@ -138,4 +138,5 @@
  /usr/local/Aria/include/ArS3Series.h \
  /usr/local/Aria/include/ArSZSeries.h convexPathPlanner.h GeometryFuncs.H \
  polygons.h space.h GeometricOp.H clipper.hpp Plotting.H asrOp.H GroupS.H \
- Minfo.H Transporter.H ChunksOp.H Ellipse.h Map.H GeometryAndExit.h
+ Minfo.H Transporter.H ChunksOp.H Ellipse.h Map.H GeometryAndExit.h \
+ CompareASR.H

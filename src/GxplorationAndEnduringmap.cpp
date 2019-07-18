@@ -880,13 +880,16 @@ lb_pi:                          Object aLine = makeLineAtTwoPointsWithObject(coo
                 shape2.push_back(s2);
                 shape2.push_back(s3);
                 shape2.push_back(s4);
+                Global_ASR = shape2;
                 
+                possible_exits_in_MFIS = crossed_exits_along_path(possible_exits_in_MFIS, adjust_info.second);
+                        
                 sprintf(mfisFileName, "%s%d%s", "Maps/Offline/EnduringMap-", v, ".png");                   
                 plotObjectsOf3Kinds(mfisFileName, temp_path1, info1, shape1);  
                 sprintf(mfisFileName, "%s%d%s", "Maps/Offline/EnduringMap*-", v, ".png");                   
-                plotObjectsOf3Kinds(mfisFileName, temp_path2, info2, shape2); 
+                plotObjectsOf3KindswithExits(mfisFileName, MFIS, adjust_info.second, possible_exits_in_MFIS); 
                 
-                Global_ASR = shape2;
+                possible_exits_in_MFIS.clear();
             
                 //storage current MFIS
                 all_chunks.push_back(MFIS);
