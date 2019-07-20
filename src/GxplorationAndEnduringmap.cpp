@@ -621,8 +621,7 @@ lb_pi:                          Object aLine = makeLineAtTwoPointsWithObject(coo
             
             if(Global_ASR.size() != 0)
                 plotObjectsOf4Kinds(mfisFileName, myrobot.getRobot(), currentRobotPositionInMFIS, MFIS, Global_ASR);
-
-                
+            
 
             recognizedTargetObjectInPV = recognizedTargetObjects.getTargetObjects();
 
@@ -871,8 +870,9 @@ lb_pi:                          Object aLine = makeLineAtTwoPointsWithObject(coo
                 //shape1 = makePolygon_Clipper(info1, 100);
                 //shape2 = makePolygon_Clipper(info2, 100);
                 
-                s1.set(2300, 5500, 4800, 4600, 0);
-                s3 = shift_line_along_perpendicluar(s1, 9000, 1);
+                //s1.set(2300, 5500, 4800, 4600, 0);
+                s1.set(300, 6400, 4800, 4600, 0);
+                s3 = shift_line_along_perpendicluar(s1, 10400, 1);
                 s2.set(s1.X2(), s1.Y2(), s3.X2(), s3.Y2(),0);
                 s4.set(s1.X1(), s1.Y1(), s3.X1(), s3.Y1(),0);
                 
@@ -880,14 +880,66 @@ lb_pi:                          Object aLine = makeLineAtTwoPointsWithObject(coo
                 shape2.push_back(s2);
                 shape2.push_back(s3);
                 shape2.push_back(s4);
-                Global_ASR = shape2;
+                if(Global_ASR.size() == 0)
+                    Global_ASR = shape2;
                 
                 possible_exits_in_MFIS = crossed_exits_along_path(possible_exits_in_MFIS, adjust_info.second);
                         
                 sprintf(mfisFileName, "%s%d%s", "Maps/Offline/EnduringMap-", v, ".png");                   
-                plotObjectsOf3Kinds(mfisFileName, temp_path1, info1, shape1);  
+                plotObjectsOf3Kinds(mfisFileName, temp_path1, info1, shape2);  
                 sprintf(mfisFileName, "%s%d%s", "Maps/Offline/EnduringMap*-", v, ".png");                   
-                plotObjectsOf3KindswithExits(mfisFileName, MFIS, adjust_info.second, possible_exits_in_MFIS); 
+                plotObjectsOf3KindswithExits(mfisFileName, MFIS, shape2, possible_exits_in_MFIS); 
+                
+                if(v == 55)
+                {
+                    
+                    vector<Object> info3;
+                    for(int m = 0; m < transformed_view.size(); m++)
+                    {
+                        if(shortestDistanceBtwTwoObjects(Global_ASR[2], transformed_view[m]) < 1000)
+                            info3.push_back(transformed_view[m]);
+                    }
+                    
+                    Object ref_line;
+                    for(int m = 0; m < info3.size(); m++)
+                    {
+                        if(m == 0)
+                            ref_line = info3[m];
+                        else
+                        {
+                            if(ref_line.length() < info3[m].length())
+                                ref_line = info3[m];
+                        }
+                    }
+                    
+                    
+                    vector<Object> plot_temp;
+
+                    plot_temp.push_back(ref_line);
+                    
+                    s1 = ref_line;
+                    s3 = shift_line_along_perpendicluar(s1, 17000, 1);
+                    s2.set(s1.X2(), s1.Y2(), s3.X2(), s3.Y2(),0);
+                    s4.set(s1.X1(), s1.Y1(), s3.X1(), s3.Y1(),0);
+                    s4 = shift_line_along_perpendicluar(s4,  500, 2);
+                    shape2.clear();
+                    shape2.push_back(s1);
+                shape2.push_back(s2);
+                shape2.push_back(s3);
+                shape2.push_back(s4);
+                    sprintf(mfisFileName, "%s%d%s", "Maps/Offline/MFIS-", v, ".png");           
+                    
+                    double shift_x = 0 - Global_ASR[0].X1(), shift_y = 0 - Global_ASR[0].Y1();
+                    double angle = 9;
+                    
+                    Global_ASR = TransformforToGlobalCoordinate(Global_ASR , Point (shift_x, shift_y), Global_ASR, 0);
+                    Global_ASR = TransformforToGlobalCoordinate(Global_ASR , Point (0, 0), Global_ASR, angle);
+                    Global_ASR = TransformforToGlobalCoordinate(Global_ASR , Point (-shift_x, -shift_y), Global_ASR, 0);
+       
+                    plotObjectsOf5Kinds(mfisFileName, MFIS, currentRobotPositionInMFIS, transformed_view, Global_ASR, shape2);
+
+                    
+                }
                 
                 possible_exits_in_MFIS.clear();
             

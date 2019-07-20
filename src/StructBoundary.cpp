@@ -3481,7 +3481,7 @@ Exit most_constrain_gap(vector<Object> group1, vector<Object> group2)
     return rnt;
 }
 
-
+/*
 vector<Object> geometry_sides(vector<Object> map)
 {
     Point p1, p2, p3, p4;
@@ -3576,7 +3576,7 @@ vector<Object> geometry_sides(vector<Object> map)
     
     //the last side
     
-}
+}*/
 
 Object shift_line_along_perpendicluar(Object line, double shift_distance, int side)
 {

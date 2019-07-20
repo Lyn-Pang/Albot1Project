@@ -1115,7 +1115,7 @@ void plotObjectsOf5Kinds(const char * filename, vector<Object> pose,
     fprintf(fgnup, "\"-\" ti \"Target Objects\" with lines 2, \\\n"); //for second argument
     fprintf(fgnup, "\"-\" ti \"Target Objects\" with linespoint 3 19, \\\n"); //for third argument
     fprintf(fgnup, "\"-\" ti \"Target Objects\" with linespoint 4 19, \\\n"); //for third argument
-    fprintf(fgnup, "\"-\" ti \"Robot Positions\" with linespoint 1 19\n"); //for forth argument
+    fprintf(fgnup, "\"-\" ti \"Robot Positions\" with linespoint 5 19\n"); //for forth argument
 
 
     // Plot pose
