@@ -175,7 +175,7 @@ vector<Object> sides_of_geo; //four sides of geometry of local space
 vector< vector<Object> > corrected_info;
 vector< vector<Object> > all_arrows;
 vector< vector<Object> > clusters;
-vector< vector<Object> > all_resions;
+vector< vector<Object> > all_regions;
 
 pair< vector<Object>,  vector<Object> > adjust_info;
 
@@ -620,7 +620,7 @@ lb_pi:                          Object aLine = makeLineAtTwoPointsWithObject(coo
             plotObjectsOf3Kinds(mfisFileName, myrobot.getRobot(), currentRobotPositionInMFIS, MFIS);
             
             if(Global_ASR.size() != 0)
-                plotObjectsOf4Kinds(mfisFileName, myrobot.getRobot(), currentRobotPositionInMFIS, MFIS, Global_ASR);
+                plotObjectsOf4Kinds(mfisFileName, myrobot.getRobot(), currentRobotPositionInMFIS, MFIS, all_regions.back());
             
 
             recognizedTargetObjectInPV = recognizedTargetObjects.getTargetObjects();
@@ -799,6 +799,21 @@ lb_pi:                          Object aLine = makeLineAtTwoPointsWithObject(coo
                 }
             }*/
      
+            
+            
+            //modification by Lyn dataset 1000-900
+            if(v > 185 && v <= 189)
+            {
+                double shift_x = 0 - all_regions.back()[0].X1(), shift_y = 0 - all_regions.back()[0].Y1();
+                    double angle = 2;
+                all_regions.back() = TransformforToGlobalCoordinate(all_regions.back() , Point (shift_x, shift_y), Global_ASR, 0);
+                    all_regions.back() = TransformforToGlobalCoordinate(all_regions.back() , Point (0, 0), Global_ASR, angle);
+                    all_regions.back() = TransformforToGlobalCoordinate(all_regions.back() , Point (-shift_x, -shift_y), Global_ASR, 0);
+                
+                //sprintf(mfisFileName, "%s%d%s", "Maps/Offline/MFIS-", v, ".png");                   
+                plotObjectsOf4Kinds(mfisFileName, myrobot.getRobot(), currentRobotPositionInMFIS, MFIS, all_regions.back());
+ 
+            }
         } 
         else
         {
@@ -924,9 +939,9 @@ lb_pi:                          Object aLine = makeLineAtTwoPointsWithObject(coo
                     s4 = shift_line_along_perpendicluar(s4,  500, 2);
                     shape2.clear();
                     shape2.push_back(s1);
-                shape2.push_back(s2);
-                shape2.push_back(s3);
-                shape2.push_back(s4);
+                    shape2.push_back(s2);
+                    shape2.push_back(s3);
+                    shape2.push_back(s4);
                     sprintf(mfisFileName, "%s%d%s", "Maps/Offline/MFIS-", v, ".png");           
                     
                     double shift_x = 0 - Global_ASR[0].X1(), shift_y = 0 - Global_ASR[0].Y1();
@@ -940,7 +955,45 @@ lb_pi:                          Object aLine = makeLineAtTwoPointsWithObject(coo
 
                     
                 }
+                    
+                if(v == 130)
+                {
+
+                    s1.set(-12600, -7000, -5000, -8500, 0);
+                    s3 = shift_line_along_perpendicluar(s1, 12000, 1);
+                    s2.set(s1.X2(), s1.Y2(), s3.X2(), s3.Y2(),0);
+                    s4.set(s1.X1(), s1.Y1(), s3.X1(), s3.Y1(),0);
+                    //s4 = shift_line_along_perpendicluar(s4,  500, 2);
+                    
+                    shape2.clear();
+                    shape2.push_back(s1);
+                    shape2.push_back(s2);
+                    shape2.push_back(s3);
+                    shape2.push_back(s4);
+                    
+                    sprintf(mfisFileName, "%s%d%s", "Maps/Offline/MFIS-", v, ".png");  
+                    plotObjectsOf4Kinds(mfisFileName, MFIS, currentRobotPositionInMFIS, transformed_view, shape2);
+                }
                 
+                if(v == 185)
+                {
+                    s1.set(6300, 24100, 0, 7500, 0);
+                    s3 = shift_line_along_perpendicluar(s1, 1000, 2);
+                    s2.set(s1.X2(), s1.Y2(), s3.X2(), s3.Y2(),0);
+                    s4.set(s1.X1(), s1.Y1(), s3.X1(), s3.Y1(),0);
+                    //s4 = shift_line_along_perpendicluar(s4,  500, 2);
+                    
+                    shape2.clear();
+                    shape2.push_back(s1);
+                    shape2.push_back(s2);
+                    shape2.push_back(s3);
+                    shape2.push_back(s4);
+                    
+                    sprintf(mfisFileName, "%s%d%s", "Maps/Offline/MFIS-", v, ".png");  
+                    plotObjectsOf4Kinds(mfisFileName, MFIS, currentRobotPositionInMFIS, transformed_view, shape2);
+                }
+                
+                all_regions.push_back(shape2);
                 possible_exits_in_MFIS.clear();
             
                 //storage current MFIS
